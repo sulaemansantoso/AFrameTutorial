@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Texture tutorial</title>
+  <title>Texture Tutorial</title>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 </head>
 <body>
@@ -12,26 +12,25 @@
       <img src="texture/Brick/basecolor.jpg" id="base">
       <img src="texture/Brick/normal.jpg" id="normal">
       <img src="texture/Brick/height.png" id="height">
-      
+      <img src="texture/Pebbles/Pebbles_020_basecolor.jpg" id="baseP">
+      <img src="texture/Pebbles/Pebbles_020_normal.jpg" id="normalP">
+      <img src="texture/Pebbles/Pebbles_020_height.png" id="heightP">
     </a-assets>
     <a-box
       src = "#base"
-      repeat= "2 2"
-      roughness = 0.5 
-      segments-depth = 200
-      segments-width= 200
-      segments-height = 200
-      displacement-map = "#height"
-      displacement-scale = 0.05
-      displacement-bias = 0
-      displacement-texture-repeat = "2 2"
+      repeat = "2 2"
       normal-map = "#normal"
       normal-texture-repeat = "2 2"
-      position= "0 1.5 -3"
-      width = 1
-      height = 1
-      depth  = 1
+      position = "-1 1.5 -2"
     ></a-box>
+    <a-sphere
+      src="#baseP"
+      normal-map  = "#normalP"
+      normal-texture-repeat = "6 6"
+      repeat = "6 6"
+      position = "1 1.5 -2"
+      radius = 0.5
+    ></a-sphere>
   </a-scene>
 </body>
 </html>
