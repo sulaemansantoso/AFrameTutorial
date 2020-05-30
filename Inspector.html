@@ -8,41 +8,8 @@
   </head>
   <body>
     <a-scene>
-      <!-- tembok -->
-      <a-box
-        color="#444444"
-        position="0 1.5 -5"
-        height="5"
-        width="15"
-        depth="0.2"
-      ></a-box>
-      <a-box
-        color="#333333"
-        position="0 -1 -1"
-        height="0.2"
-        width="15"
-        depth="10"
-      ></a-box>
-      <a-box
-        color="#222222"
-        position="-5 1.5 -1"
-        height="5"
-        width="0.2"
-        depth="10"
-      ></a-box>
-
-      <a-light type="ambient" intensity="0.2"></a-light>
-      <a-light
-        type="directional"
-        position="5 1.5 -3"
-        target="#box3"
-        intensity="1"
-        angle =30
-        penumbra = 0.2
-      ></a-light>
-
       <!-- box -->
-      <a-box id="box1" scale="0.897 0.897 0.897" rotation="0 148.015 0" animation="loop: NaN" color="#aa0000" position="0 1.5 -0.82077"></a-box>
+      <a-box id="box1" color="#aa0000" position="0 1 -3"></a-box>
       <a-box id="box2" color="#00aa00" position="2 1 -3"></a-box>
       <a-box id="box3" color="#aaaa00" position="-2 1 -3"></a-box>
     </a-scene>
