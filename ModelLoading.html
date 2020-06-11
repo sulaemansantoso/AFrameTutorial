@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Model</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-assets-item id="scene" src="model/MonkeyWithAnimation.gltf"
+      
+        ></a-assets-item>
+      </a-assets>
+      <a-gltf-model src="#scene" position="-3 1.5 -3" scale="1 1 1"   animation-mixer >
+      </a-gltf-model>
+      <a-gltf-model src="#scene" position="0 1.5 -3" scale="1 1 1"   animation-mixer="clip: Nodding;" >
+      </a-gltf-model>
+      <a-entity gltf-model="#scene" position="3 1.5 -3" animation-mixer="clip:Shaking" >  </a-entity>
+    </a-scene>
+  </body>
+</html> 
+  
