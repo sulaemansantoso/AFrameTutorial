@@ -3,36 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EventHandler Tutorial</title>
+    <title>Loading Model</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script> 
-
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
   </head>
   <body>
     <a-scene>
       <a-camera>
-        <a-cursor></a-cursor>
+        <a-entity
+          cursor="fuse:true;fuseTimeout:1500"
+          position=" 0 0 -2"
+          material="color:#222222;"
+          geometry="primitive:ring;radius-inner:0.05;radius-outer:0.1 "
+          animation__satu="property:scale;to: 1 1 1; startEvents:mouseleave; "
+          animation__dua="property:scale; to :0.5 0.5 0.5; startEvents:fusing;"
+        >
+        </a-entity>
       </a-camera>
-      <!-- box -->
       <a-box
-        id="box1"
         color="#aa0000"
         position="0 1.5 -3"
-        proxy-event="event: click; to: #box2; as: warna"
-        event-set__masuk="_event:mouseenter; color:#00aa00"
-        event-set__keluar="_event:mouseleave; color:#0000aa"
-       
-      ></a-box>
-      <a-box
-        id="box2"
-        color="#aa0000"
-        position="2 1.5 -3"
-        animation__warna="property:color;to:#00aa00;startEvents:warna"
-        animation__size="property:scale;to:0.5 2 0.5;startEvents:warna"
-        animation__return="property:color;to:#aa0000;startEvents:click"
-        animation__returnsize="property:scale;to:1 1 1;startEvents:click"
-        
+        animation__satu = "property:material.color; to : #aaaa00; startEvents:click;"
       ></a-box>
     </a-scene>
   </body>

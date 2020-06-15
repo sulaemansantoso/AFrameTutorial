@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Entity</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity light="type:point;color:#ff0000" position="-2 1.5 -3" ></a-entity>
+      <!-- <a-light type="point"></a-light> -->
+      <a-entity
+        geometry="primitive:box;"
+        material="color:#55aa00"
+        position="2 1.5 -3"
+      ></a-entity>
+      <a-box position="0 1.5 -3" color="#55aa00"></a-box>
+    </a-scene>
+  </body>
+</html>
