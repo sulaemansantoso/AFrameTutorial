@@ -6,28 +6,31 @@
     <title>Loading Model</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
-
   </head>
   <body>
     <a-scene>
-      <a-assets>
-        <a-assets-item id="monkey" src="model/MonkeyWithAnimation.gltf"></a-assets-item>
-      </a-assets>
-
-      <a-gltf-model src="#monkey" position="-3 1.5 -3"
-       animation-mixer
-      ></a-gltf-model>
-
-      <a-gltf-model src="model/MonkeyWithAnimation.gltf"
-        position="0 1.5 -3"
-        animation-mixer="clip:Nodding;loop:pingpong"
-      ></a-gltf-model>
+      <a-asset>
+        <a-asset-item id="kera" src="model/MonkeyWithAnimation.gltf"></a-asset-item>
+      </a-asset>
 
       <a-entity
+        gltf-model="#kera"
+        position="-3 1.5 -3"
+        rotation="0 0 0"
+        animation-mixer="clip:Nodding;"
+      >        
+      </a-entity>
+      <a-gltf-model
+        src="model/MonkeyWithAnimation.gltf"
+        position=" 0 1.5 -3"
+        animation-mixer="clip:Nodding;loop:pingpong;"
+
+      ></a-gltf-model>
+      <a-entity 
         gltf-model="model/MonkeyWithAnimation.gltf"
-        position="3 1.5 -3"
+        position=" 3 1.5 -3"
         animation-mixer="clip:Shaking;"
       ></a-entity>
-   </a-scene>
+    </a-scene>
   </body>
-</html> 
+</html>
