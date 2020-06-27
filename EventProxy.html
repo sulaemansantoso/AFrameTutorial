@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Most Basic Super-Hands Example</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-camera id="cam">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <a-text
+        value="test text"
+        color="#000000"
+        position="0 1.5 -3"
+        align="left"
+      ></a-text>
+
+      <a-entity
+        text="value:test text2 ini teh test text 2test test test teste test\ntestestestest\ntsetstsetst;
+              color:#000000;
+              height:1.5;
+              width:1.5;
+              align:center;
+              wrapCount:12;
+             "
+        position="0 1.6 -1"
+        look-at="#cam"
+        geometry="primitive:plane; width:2; height:2;"
+      ></a-entity>
+
+      <a-box position="2 1.5 -3" color="green"></a-box>
+    </a-scene>
+  </body>
+</html>
