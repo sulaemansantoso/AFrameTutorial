@@ -1,0 +1,40 @@
+text component
+- a-text
+- text component
+- value
+- wrapCount;
+- open inspector to modify other
+- primitive
+- auto witdth height
+
+event proxy
+- look at component
+
+- modify animation remotely
+- creating animation self
+- create proxy event 
+- create two proxy event
+
+mixin
+- what is mixin 
+- property mixin
+- add on two object
+- animation mixin
+- add on two object
+- mixin precedence
+
+
+controls
+- 
+
+
+physics
+
+
+nav mesh
+
+
+AR
+
+
+

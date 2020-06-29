@@ -14,27 +14,38 @@
         <a-cursor></a-cursor>
       </a-camera>
 
-      <a-text
-        value="test text"
-        color="#000000"
-        position="0 1.5 -3"
-        align="left"
-      ></a-text>
-
       <a-entity
-        text="value:test text2 ini teh test text 2test test test teste test\ntestestestest\ntsetstsetst;
-              color:#000000;
-              height:1.5;
-              width:1.5;
-              align:center;
-              wrapCount:12;
-             "
-        position="0 1.6 -1"
+        geometry="primitive: triangle"
+        text__btn_up="align: center; baseline: top; value: UP; wrapCount: 5"
+        position=" -2 2.5 -3"
+        material="color:green;"
+        proxy-event__satu="event:click; as:up ;to:#box"
         look-at="#cam"
-        geometry="primitive:plane; width:2; height:2;"
-      ></a-entity>
+      >
+      </a-entity> 
 
-      <a-box position="2 1.5 -3" color="green"></a-box>
+      <a-entity look-at="#cam" position=" -2 1 -3">
+        <a-entity
+          geometry="primitive: triangle"
+          rotation="0 0 180"
+          material="color:green;"
+          proxy-event="event:click; as:down ;to:#box"
+        >
+          <a-entity
+            text__btn_up="align: center; baseline: bottom; value: DOWN; wrapCount: 10"
+            rotation="0 0 180"
+          ></a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-box
+        id="box"
+        color="#aaaa00"
+        position="1 1.5 -3"
+        animation__up="property:position; to: 1 2.5 -3;startEvents:up"
+        animation__down="property:position; to: 1 0.5 -3;startEvents:down"
+        animation__reset="property:position;to: 1 1.5 -3;startEvents:click"
+      ></a-box>
     </a-scene>
   </body>
 </html>

@@ -2,45 +2,27 @@
   <head>
     <title>Text Component</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
   </head>
 
   <body>
     <a-scene>
-      <a-entity>
-        <a-camera>
-          <a-cursor></a-cursor>
-        </a-camera>
-      </a-entity>
-
+      <!-- <a-text value="contoh teks"
+        color="#ff0000"
+        position="0 1.5 -2"
+      ></a-text> -->
       <a-entity
-        text="
-        value:this is a text component test;
-        color:#ffffff;
-        align:center;
-        wrapCount:10;
-        font: kelsonsans;
-       "
-        geometry="primitive:plane;"
-        material="color:#aa0a0a"
-        position="0 1.5 -3"
-      >
-      </a-entity>
-      <a-entity
-        text="
-        value:THIS IS A TEST;
-        color:#ffffff;
-        align:center;
-        wrapCount:10;
-        font: ./font/PressStart2P-Regular-msdf.json;
-       "
-       negate = "true"
-        geometry="primitive:plane;"
-        material="color:#aa0a0a"
-        position="2 1.5 -3"
-      >
-      </a-entity>
+         text="
+           value:contoh sebuah teks dasar\ncontoh sebuah teks dasarcontoh sebuah teks dasar\ncontoh sebuah teks dasar;
+           color:#000000;
+           wrapCount:15;
+           font:./font/PressStart2P-Regular-msdf.json;
+           align: center;
+           negate : false;
+         "
+         geometry="primitive:plane;"
+         material="color:#aaaaaa"
+         position="0 1.5 -1"
+      ></a-entity>
     </a-scene>
   </body>
 </html>
