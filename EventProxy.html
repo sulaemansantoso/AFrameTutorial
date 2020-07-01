@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Most Basic Super-Hands Example</title>
+    <title>Proxy Event</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
@@ -19,32 +19,39 @@
         text__btn_up="align: center; baseline: top; value: UP; wrapCount: 5"
         position=" -2 2.5 -3"
         material="color:green;"
-        proxy-event__satu="event:click; as:up ;to:#box"
+        look-at="#cam"
+        proxy-event__satu="
+          event:click;
+          as : atas;
+          to : #box;
+        "
+      >
+      </a-entity>
+
+      <a-entity
+        position=" -2 1 -3"
+        text__btn_up="align: center; baseline: bottom; value: DOWN; wrapCount: 10"
         look-at="#cam"
       >
-      </a-entity> 
-
-      <a-entity look-at="#cam" position=" -2 1 -3">
         <a-entity
           geometry="primitive: triangle"
           rotation="0 0 180"
           material="color:green;"
-          proxy-event="event:click; as:down ;to:#box"
-        >
-          <a-entity
-            text__btn_up="align: center; baseline: bottom; value: DOWN; wrapCount: 10"
-            rotation="0 0 180"
-          ></a-entity>
-        </a-entity>
+          proxy-event__satu="
+          event:click;
+          as : bawah;
+          to : #box;
+        "
+        ></a-entity>
       </a-entity>
 
       <a-box
         id="box"
         color="#aaaa00"
         position="1 1.5 -3"
-        animation__up="property:position; to: 1 2.5 -3;startEvents:up"
-        animation__down="property:position; to: 1 0.5 -3;startEvents:down"
-        animation__reset="property:position;to: 1 1.5 -3;startEvents:click"
+        animation__atas="property:position; to:1 2.5 -3; startEvents:atas"
+        animation__bawah="property:position; to:1 0.5 -3; startEvents:bawah"
+        animation__reset="property:position; to:1 1.5 -3; startEvents:click"
       ></a-box>
     </a-scene>
   </body>

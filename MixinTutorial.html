@@ -10,33 +10,25 @@
     <a-scene>
       <a-assets>
         <a-mixin
-          id="smallRedCube"
-          geometry="primitive:box;width:0.5;height:0.5;depth:0.5"
-          material="color:#aa0000;"
+          id="kotakmerah"
+          geometry="primitive:box;"
+          material="color:#ff0000"
         ></a-mixin>
         <a-mixin
-          id="spinning"
-          animation__spin="property:rotation;
-                from:0 0 0 ;
-                to :0 360 0;
-                loop: true; "
-          animation__scale="property:scale;
-                from: 1 1 1;
-                to :0.5 2 0.5;
-                loop:true;
-                dir:alternate;"
-        ></a-mixin>
-      </a-assets>
-      <a-entity
-        mixin="spinning smallRedCube"
-        position="0 1.5 -3"
-        material="color:#00aa00"
-        animation__color="property:material.color;
-          from:#00aa00;
-          to:#aa0000;
+          id="berputar"
+          animation="property:rotation;
+          dur:2000;
+          to:0 360 0;
           loop:true;
-          dir:alternate;
-        "
+          startEvents:click"
+        ></a-mixin>
+        <a-mixin id="hijau" material="color:#00ff00"></a-mixin>
+      </a-assets>
+      <a-camera><a-cursor></a-cursor></a-camera>
+      <a-entity position="-2 1.5 -3" mixin="kotakmerah hijau berputar"></a-entity>
+      <a-entity position="0 1.5 -3" mixin="hijau kotakmerah berputar"></a-entity>
+      <a-entity position="2 1.5 -3" mixin="berputar kotakmerah hijau"
+          material="color:#aaaa00"
       ></a-entity>
     </a-scene>
   </body>
