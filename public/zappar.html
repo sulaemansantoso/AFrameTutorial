@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Text Component</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://libs.zappar.com/zappar-aframe/0.2.3/zappar-aframe.js"></script>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-entity
+        camera
+        zappar-camera="user-facing: true; anchor-origin: 0 -1 0"
+      ></a-entity>
+
+      <a-entity position="0 -1 0">
+        <a-entity zappar-face>
+          <a-entity gltf-model="./model/Hollow.glb" scale="5  5 5 " position="0 1 0"></a-entity>
+        </a-entity>
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
