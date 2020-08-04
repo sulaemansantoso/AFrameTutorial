@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>Expanding Aframe</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("hello-aframe", {
+        schema: {
+          pesan: { type: "string", default: "hello" },
+          pesan2: { type: "string", default: "sesuatu" },
+        },
+        update : function(oldData) {
+          console.log("UPDATED");
+        },
+        tick : function(){
+          this.el.getObject3D("mesh").rotation.y += 0.01;
+        },
+        init: function () {
+          let data = this.data;
+          let el = this.el;
+
+          this.el.getObject3D("mesh").material.color = new THREE.Color("yellow");
+          this.el.addEventListener("click", function (ev) {
+            console.log(data.pesan + " " +  data.pesan2);
+            ev.srcElement.setAttribute("hello-aframe","pesan:hallo juga");
+          });
+        },
+      });
+    </script>
+    <a-scene>
+      <a-camera>
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-box
+        hello-aframe="pesan:hello;pesan2:a-box merah"
+        id="box1"
+        material="color:red;"
+        position="-2 1.5 -3"
+      ></a-box>
+      <a-box
+        hello-aframe="pesan:goodbye;pesan2:a-box hijau"
+        id="box2"
+        material="color:green;"
+        position="2 1.5 -3"
+      ></a-box>
+    </a-scene>
+  </body>
+</html>

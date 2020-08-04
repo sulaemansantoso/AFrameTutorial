@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expanding Aframe</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("hello-world", {
+        init: function () {
+          console.log("hello world");
+        },
+      });
+      AFRAME.registerComponent("rotating", {
+        tick: function () {
+          this.el.getObject3D("mesh").rotation.y -= 0.01;
+        },
+      });
+
+      AFRAME.registerComponent("visibility-tracker", {
+        schema: {
+          // visible: { default: true },
+          
+        },
+        init: function () {
+          console.log("init tracker");
+        },
+        update: function (oldData) {
+          console.log("changes" + this.data);
+          this.el.object3D.visible = this.data.visible;
+        },
+      });
+
+      AFRAME.registerComponent("customcube", {
+        schema: {
+          size: { type: "number", default: 1 },
+          color: { type: "color", default: "#00ff00" },
+        },
+        tick: function () {
+          this.el.getObject3D("mesh").rotation.y += 0.01;
+        },
+        init: function () {
+          let data = this.data;
+          let el = this.el;
+          let knob = true;
+
+          this.geometry = new THREE.BoxGeometry(
+            data.size,
+            data.size,
+            data.size,
+            4,
+            4,
+            4
+          );
+          this.material = new THREE.MeshStandardMaterial({
+            color: data.color,
+            wireframe: true,
+          });
+
+          this.mesh = new THREE.Mesh(this.geometry, this.material);
+          el.setObject3D("mesh", this.mesh);
+
+          el.addEventListener("click", function () {
+            let r = Math.random();
+            let g = Math.random();
+            let b = Math.random();
+
+            let rand_color = new THREE.Color(r, g, b);
+
+            el.getObject3D("mesh").material.color = rand_color;
+
+            let box = document.querySelector("#box");
+            knob = !knob;
+            box.setAttribute("visibility-tracker", { visible: knob });
+          });
+        },
+        update: function (oldData) {
+          var data = this.data;
+          var el = this.el;
+
+          if (Object.keys(oldData).length === 0) {
+            return;
+          }
+
+          if (data.size !== oldData.size) {
+            el.getObject3D("mesh").geometry = new THREE.BoxBufferGeometry(
+              data.size,
+              data.size,
+              data.size
+            );
+          }
+
+          // Material-related properties changed. Update the material.
+          if (data.color !== oldData.color) {
+            el.getObject3D("mesh").material.color = new THREE.Color(data.color);
+          }
+        },
+
+        remove: function () {
+          this.el.removeObject3D("mesh");
+        },
+      });
+    </script>
+    <a-scene>
+      <a-camera>
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-entity customcube="size:2;" position="0 1.5 -3"></a-entity>
+      <a-box
+        id="box"
+        visibility-tracker
+        color="#ff0000"
+        position="0 1.5 -3"
+        rotating
+      ></a-box>
+    </a-scene>
+  </body>
+</html>

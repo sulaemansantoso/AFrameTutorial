@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Primitives</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("hearts", {
+        schema: {
+          radius_inner: { type: "number", default: 0.04 },
+          radius_outer: { type: "number", default: 1 },
+        },
+        tick: function () {
+          this.donutz.rotation.y += 0.1;
+        },
+        update: function (old) {
+          var data = this.data;
+          var el = this.el;
+
+          if (Object.keys(old).length === 0) {
+            return;
+          }
+
+          if (data.radius_outer != old.radius_outer) {
+            let box = new THREE.BoxGeometry(1, 1, 1);
+
+            let group = new THREE.Group();
+            let donut = new THREE.TorusBufferGeometry(
+              this.data.radius_outer,
+              this.data.radius_inner,
+              45,
+              45
+            );
+            let material = new THREE.MeshStandardMaterial({
+              color: 0xff000,
+              wireframe: false,
+            });
+            let box_mesh = new THREE.Mesh(box, material);
+            this.donutz = new THREE.Mesh(donut, material);
+            this.donutz.rotation.z += Math.PI / 2;
+            group.add(box_mesh);
+            group.add(this.donutz);
+            this.el.setObject3D("mesh", group);
+          }
+        },
+        init: function () {
+          let box = new THREE.BoxGeometry(1, 1, 1);
+          console.log(this.data);
+
+          let group = new THREE.Group();
+          let donut = new THREE.TorusBufferGeometry(
+            this.data.radius_outer,
+            this.data.radius_inner,
+            45,
+            45
+          );
+          let material = new THREE.MeshStandardMaterial({
+            color: 0xffff00,
+            wireframe: false,
+          });
+          let box_mesh = new THREE.Mesh(box, material);
+          this.donutz = new THREE.Mesh(donut, material);
+          this.donutz.rotation.z += Math.PI / 2;
+          group.add(box_mesh);
+          group.add(this.donutz);
+          this.el.setObject3D("mesh", group);
+        },
+      });
+    </script>
+    <a-scene>
+      <a-camera>
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-entity
+        hearts
+        position="0 1.5 -4"
+        animation__satu="property:position; from:0 1.5 -4;to:0 1.5 -12; startEvents:click; dir:alternate;"
+        animation__dua="property:hearts.radius_outer;from:1; to: 4; startEvents:click; dir:alternate;"
+      ></a-entity>
+    </a-scene>
+  </body>
+</html>

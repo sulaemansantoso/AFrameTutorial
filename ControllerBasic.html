@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Hand Controller</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-entity>
+        <a-camera></a-camera>
+      </a-entity>
+
+      <!-- <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
+      <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"></a-entity> -->
+   
+      <!-- <a-entity laser-controls="hand: right"></a-entity> -->
+      <a-entity
+        sphere-collider="objects:a-box;"
+        super-hands
+        hand-controls="hand:left;color:#ff0000"
+      ></a-entity>
+
+      <a-box
+        id="thebox"
+        grabbable 
+        scale="0.5 0.5 0.5"
+        color="blue"
+        position="0 1.5 -1"
+        animation="property:rotation;
+      from:0 0 0;
+      to:360 360 0;
+      startEvents: click"
+      ></a-box>
+    </a-scene>
+  </body>
+</html>
