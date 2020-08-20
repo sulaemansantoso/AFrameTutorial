@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Examples • Checkpoints</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+      <script>
+          AFRAME.registerComponent("navlog",{
+              init :function(){
+                this.el.addEventListener('navigation-start',()=>{
+                    console.log("nav started");
+                    let sky = document.querySelector("#skies");
+                    sky.setAttribute('color','#000000');
+                });
+                this.el.addEventListener('navigation-end',()=>{
+                    console.log("nav ended");
+                    let sky = document.querySelector("#skies");
+                    sky.setAttribute('color','#FFFFFF');
+                    
+                });
+                
+              }
+          });
+      </script>
+    <a-scene>
+      <a-sky id=skies color="#FF0000"></a-sky>
+      <a-entity
+        id="rig"
+        movement-controls="controls:checkpoint;"
+        checkpoint-controls="mode:animate"
+        navlog
+      >
+        <a-entity camera position="0 1.5 0" look-controls>
+          <a-cursor></a-cursor>
+        </a-entity>
+      </a-entity>
+      <a-grid></a-grid>
+      <a-box checkpoint color="#F00" position="1 1.5 -3"></a-box>
+      <a-box checkpoint color="#0F0" position="-1 1.5 -3"></a-box>
+    </a-scene>  
+  </body>
+</html>

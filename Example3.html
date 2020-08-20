@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Locomotion Example</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("navlog", {
+        init: function () {
+          this.el.addEventListener("navigation-start", function () {
+              console.log("%cStart","font-size:2em;color:green;");
+          });
+          this.el.addEventListener("navigation-end", function () {
+            console.log("%cEnd","font-size:2em;color:red;");     
+          });
+        },
+      });
+    </script>
+    <a-scene>
+      <a-grid src="./texture/grid_tile.png"></a-grid>
+
+      <a-entity
+        navlog
+        id="Locomotion"
+        movement-controls="controls:checkpoint"
+        checkpoint-controls="mode:animate; animateSpeed:3"
+      >
+        <a-camera>
+          <a-cursor> </a-cursor>
+        </a-camera>
+      </a-entity>
+
+      <a-circle
+        checkpoint="offset:0 0 0"
+        color="#500"
+        position="0 0.1 -3"
+        rotation="-90 0 0 "
+      ></a-circle>
+
+      <a-circle
+        checkpoint
+        color="#550"
+        position="-5 0.1 -3"
+        rotation="-90 0 0 "
+      ></a-circle>
+
+      <a-circle
+        checkpoint
+        color="#050"
+        position="5 0.1 -3"
+        rotation="-90 0 0 "
+      ></a-circle>
+    </a-scene>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sound Tutorial</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("soundcontroller", {
+        init: function () {
+          let el = this.el;
+          let soundObject = document.querySelector("#music");
+
+          this.el.addEventListener("playSound", function () {
+            soundObject.components.sound.playSound();
+            console.log("%cplay", "font-size:2em;");
+          });
+
+          this.el.addEventListener("pausedSound", function () {
+            soundObject.components.sound.pauseSound();
+            console.log("%cpaused", "font-size:2em;");
+          });
+
+          this.el.addEventListener("stopSound", function () {
+            soundObject.components.sound.stopSound();
+            console.log("%cstopped", "font-size:2em;");
+          });
+        },
+      });
+
+      AFRAME.registerComponent("player", {
+        init: function () {
+          let el = this.el;
+          this.el.addEventListener("click", function (ev) {
+            let id = ev.srcElement.id;
+            if (id == "play") {
+              el.emit("playSound", {}, true);
+            } else if (id == "pause") {
+              el.emit("pausedSound", {}, true);
+            } else {
+              el.emit("stopSound", {}, true);
+            }
+            // console.log("%cclicked", "color:blue; font-size:2em;");
+          });
+        },
+      });
+    </script>
+    <a-scene soundcontroller>
+      <a-camera >
+        <a-cursor raycaster="objects:a-box"></a-cursor>
+      </a-camera>
+      <!-- <a-sound
+        src=" audio/happy.mp3"
+        autoplay="false"
+        position="0 2 5"
+      ></a-sound> -->
+      <a-entity
+        id="music"
+        geometry="primitive: plane"
+        material="color: blue"
+        position="0 1 0"
+        sound="src: audio/song1.mp3;"
+        rotation="-90 0 0"
+        scale="10 10 10"
+      ></a-entity>
+
+      <a-box id="play" player color="#F00" position="0 1.5 -3"></a-box>
+      <a-box id="pause" player color="#550" position="1.5 1.5 -3"></a-box>
+      <a-box id="stop" player color="#055" position="-1.5 1.5 -3"></a-box>
+    </a-scene>
+  </body>
+</html>
