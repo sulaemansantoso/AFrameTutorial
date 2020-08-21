@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sound Tutorial</title>
+    <title>Physics Tutorial</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.js"></script>
   </head>
@@ -46,128 +46,8 @@
         <a-cursor></a-cursor>
       </a-camera>
 
-      
-        <!-- CONE TWIST -->
-        <a-entity position="2 0 -1">
-            <a-text value="Cone Twist" position="0 1.5 0" align="center"></a-text>
-            <a-sphere id="conetwist-target" radius="0.125" color="#777" position="0 1 0" static-body></a-sphere>
-            <a-box width="0.25" height="0.25" depth="0.25" color="#F00" position="-0.5 1 0"
-                   dynamic-body
-                   constraint="type: coneTwist;
-                               target: #conetwist-target;
-                               pivot: 0.125 0 0.0;
-                               targetPivot: -0.125 0.0 0.0;
-                               axis: 1.0 0.0 0.0;
-                               targetAxis: 1.0 0.0 0.0">
-            </a-box>
-          </a-entity>
-
-
-        <!-- LOCK -->
-        <a-entity position="0 0 -1">
-            <a-text value="Lock" position="0 1.5 0" align="center"></a-text>
-            <a-box id="lock-target"
-                   position="0 1.0 0"
-                   scale="0.25 0.25 0.25"
-                   color="#777"
-                   static-body>
-            </a-box>
-            <a-box color="#F00"
-                   position="0 1.25 0"
-                   scale="0.25 0.25 0.25"
-                   dynamic-body
-                   constraint="type: lock;
-                               target: #lock-target;
-                               maxForce: 100">
-            </a-box>
-          </a-entity>
-
-              <!-- POINT TO POINT -->
-              <a-entity position="4 0 -1">
-                <a-text value="Point to Point" position="0 1.5 0" align="center" color="#000"></a-text>
-                <a-box id="pointtopoint-target"
-                       color="#777"
-                       position="0 1 0"
-                       scale="0.25 0.25 0.25"
-                       static-body>
-                </a-box>
-                <a-box color="#F00"
-                       position="0.125 0.875 0"
-                       scale="0.25 0.25 0.25"
-                       dynamic-body
-                       constraint="type: pointToPoint;
-                                   target: #pointtopoint-target;
-                                   pivot: -0.125 0 0 ;
-                                   targetPivot: 0.125 -1 0.125">
-                </a-box>
-              </a-entity>
-
-
-        <!-- DISTANCE -->
-        <a-entity position="-4 0 -1">
-            <a-text value="Distance" position="0 1.5 0" align="center" color="#000"></a-text>
-            <a-sphere id="distance-target"
-                   radius="0.125"
-                   position="0 1 0"
-                   color="#777"
-                   static-body>
-            </a-sphere>
-            <a-sphere color="#F00"
-                   radius="0.125"
-                   position="0 1.2 0"
-                   dynamic-body
-                   constraint="type: distance;
-                               target: #distance-target;
-                               distance: 1.5;
-                               maxForce: 10;">
-            </a-sphere>
-          </a-entity>
-
-
-      <!-- Floor -->
-      <!-- <a-plane
-        static-body
-        color="gray"
-        rotation="-90 0 0"
-        width="10"
-        height="10"
-      ></a-plane> -->
-
-
-
-
-
-
-      
-      <!-- Immovable box -->
-      <!-- <a-box
-        boxgenerator
-        static-body
-        position="0 0.5 -1"
-        width="3"
-        height="1"
-        depth="1"
-      ></a-box> -->
-      <!-- <a-box
-        id="anchor"
-        static-body
-        color="#F00"
-        scale="0.1 0.1 0.1"
-        position="0 1.5 -3"
-      ></a-box>
-      <a-box
-        boxgenerator
-        constraint="target:#anchor;
-        type:hinge ;
-        collideConnected:true;
-        targetPivot: 0 0.4 0;"
-
-        dynamic-body
-        color="#4FF"
-        scale="2.5 0.5 0.5"
-        position="2 2.5 -3"
-      ></a-box> -->
-      <!-- <a-box
+    
+     <a-box
         id="anchor"
         static-body
         color="#F00"
@@ -184,6 +64,6 @@
         position="0 1.9 -1"
       ></a-box>
       <a-entity light="type: hemisphere"></a-entity>
-    </a-scene> -->
+    </a-scene> 
   </body>
 </html>
