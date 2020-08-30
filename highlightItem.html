@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HighLightItem</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("highlighter", {
+        init: function () {
+          let el = this.el;
+          this.highlighted = false;
+
+          el.addEventListener("model-loaded", function () {
+            console.log("model loaded");
+            let mesh = el.getObject3D("mesh");
+            this.oldMat = [];
+            mesh.traverse((node) => {
+              if (node.material) {
+                let oldColor = node.material.color;
+                this.oldMat.push(oldColor);
+              }
+            });
+            console.log(this.oldMat);
+          });
+
+          el.addEventListener("mouseleave", function () {
+            let mesh = el.getObject3D("mesh");
+            let i = 0;
+            mesh.traverse((node) => {   
+              if (node.material) {
+                node.material.color = this.oldMat[i++];
+                node.material.needsUpdate = true;
+              }
+            });
+          });
+
+          el.addEventListener("mouseenter", function () {
+            let mesh = el.getObject3D("mesh");
+            mesh.traverse((node) => {
+              if (node.material) {
+                node.material.color = new THREE.Color(0xff0000);
+                node.material.needsUpdate = true;
+              }
+            });
+          });
+        },
+      });
+    </script>
+
+    <a-scene>
+      <a-camera>
+        <a-cursor raycaster="objects:a-gltf-model"></a-cursor>
+      </a-camera>
+      <a-gltf-model
+        highlighter
+        id="one"
+        src="model/fallguy.glb"
+        scale="0.005 0.005 0.005"
+        position="0 1.5 -3"
+      >
+      </a-gltf-model>
+    </a-scene>
+  </body>
+</html>

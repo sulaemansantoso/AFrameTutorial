@@ -1,16 +1,29 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>introduction</title>
+    <title>Perkenalan</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   </head>
+
   <body>
     <a-scene>
-    
-      <a-box position="0 1.5 -4" src="texture/logo.png"></a-box>
-      <a-sphere position="2 1.5 -4" radius="0.5"></a-sphere>
+      <a-camera>
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-box
+        color="red"
+        position="0 1.5 -3"
+        scale="0.4 0.4 0.4"
+        animation__satu="property:rotation; from:0 0 0 ; to : 0 180 0; 
+         startEvents:click"
+      ></a-box>
+      <a-box color="green" position="2 1.5 -3"></a-box>
+      <a-box color="blue" position="-2 1.5 -3" rotation="0 45 0"></a-box>
+      <a-sphere color="yellow" position="0 1.5 -5"></a-sphere>
+      <a-gltf-model
+        src="model/fallguy.glb"
+        scale="0.01 0.01 0.01"
+        position="0 1.5 1"
+      ></a-gltf-model>
     </a-scene>
   </body>
 </html>

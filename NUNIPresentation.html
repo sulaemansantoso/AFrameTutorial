@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sound Example</title>
+    <title>Nuni Presentation</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
   </head>
   <body>
     <a-scene>
       <a-camera>
-        <a-cursor raycaster="objects:a-box"></a-cursor>
+        <a-cursor></a-cursor>
       </a-camera>
-
-      <a-box src="texture/Brick/basecolor.jpg"  position="0 1.5 -3"
-         animation__satu = "property:rotation;
-         from:0 0 0 ;
-         to : 0 180 0;
-         duration:3;
-         startEvents:click;"
-      ></a-box>
+      <a-box 
+      color="#F00" 
+      position="0 1.5 -3"
+      animation__satu="property:rotation;
+      from:0 0 0;
+      to:0 180 0;
+      startEvents:click;"
+      
+      > </a-box>
     </a-scene>
   </body>
 </html>

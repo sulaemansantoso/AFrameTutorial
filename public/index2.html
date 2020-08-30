@@ -20,12 +20,12 @@
   </head>
 
   <body style="margin: 0; overflow: hidden;">
-    <div  style="top: 0px; left : 20px; z-index:5;position: absolute; display: block; padding: 4px; background-color: white;">
+    <div  style="top: 0px; left : 20px;  z-index:5;position: absolute; display: block; padding: 4px; background-color: white;">
        <div id="placeholder">
 
        </div>
-       <a href="index1.html">Page 1</a>]
-       <a href="index2.html">Page 2</a>
+       <a href="index2.html">Page 2</a>]
+       <a href="index1.html">Page 1</a>
 
     </div>
     
@@ -34,27 +34,17 @@
       embedded
       arjs="sourceType: webcam; debugUIEnabled: false;"
     >
-
-    <!-- -6.172125, 106.827162 -->
-    <a-box material="color: yellow" scale="2 2 2 " gps-entity-place="latitude: -6.172125,  longitude: 106.827162" 
+    <a-box color="red" gps-projected-entity-place="latitude: -6.918142; longitude: 107.603926" 
+    position="0 30 0" />
+    <a-box material="color:green" scale="5 5 5" gps-entity-place="latitude:   -6.910867,  longitude:   107.597433" 
     position="0 30 0"/>  
-
-    <!-- -6.175268, 106.823680 -->
-    <a-box material="color: red" scale="2 2 2 " gps-entity-place="latitude: -6.175268,  longitude: 106.823680" 
-    position="0 30 0"/>  
-
-    <!-- -6.175492, 106.829677 -->
-    <a-box material="color: blue" scale="2 2 2 " gps-entity-place="latitude: -6.175492,  longitude: 106.829677" 
-    position="0 30 0"/>  
-    
-     <a-text
+     <a-text    
   
      value="No markers around"
         look-at="[gps-camera]"
         scale="5 5 5"
       ></a-text>
-      <a-camera gps-camera="simulateLatitude: -6.175578 ;simulatelongitude: 106.827200" rotation-reader> </a-camera>
-     
+      <a-camera gps-camera="simulateLatitude: -6.910867 ;simulatelongitude: 107.597433" rotation-reader> </a-camera>
     </a-scene>
   </body>
 </html>
