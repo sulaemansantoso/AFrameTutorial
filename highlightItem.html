@@ -11,8 +11,9 @@
       AFRAME.registerComponent("highlighter", {
         init: function () {
           let el = this.el;
-          this.highlighted = false;
 
+
+        //this runs when 3D model is loaded will store the original material color
           el.addEventListener("model-loaded", function () {
             console.log("model loaded");
             let mesh = el.getObject3D("mesh");
@@ -23,9 +24,9 @@
                 this.oldMat.push(oldColor);
               }
             });
-            console.log(this.oldMat);
           });
 
+          //this runs when cursor leaves the model returning it to original color
           el.addEventListener("mouseleave", function () {
             let mesh = el.getObject3D("mesh");
             let i = 0;
@@ -37,6 +38,7 @@
             });
           });
 
+          //this runs when cursor enters the model giving it a highlighted color
           el.addEventListener("mouseenter", function () {
             let mesh = el.getObject3D("mesh");
             mesh.traverse((node) => {
@@ -54,8 +56,9 @@
       <a-camera>
         <a-cursor raycaster="objects:a-gltf-model"></a-cursor>
       </a-camera>
+      <!-- highlighter is our custom component  -->
       <a-gltf-model
-        highlighter
+        highlighter 
         id="one"
         src="model/fallguy.glb"
         scale="0.005 0.005 0.005"
