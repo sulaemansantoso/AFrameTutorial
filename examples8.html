@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physics Testing</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+
+    <script>
+        AFRAME.registerComponent('boxgenerator',{
+            init : function() {
+                let el = this.el;
+                el.addEventListener('click', function() {
+                    let scene =  document.querySelector("#scene");
+                    let boxBaru = document.createElement("a-box");
+                    
+                    let temp = Math.random() * 2- 1;
+                    boxBaru.setAttribute('position',`${temp} 7 -3`);
+                    boxBaru.setAttribute('color','red');
+                    boxBaru.setAttribute('scale','0.2 0.2 0.2');    
+                    boxBaru.setAttribute('dynamic-body','shape:box');
+                    boxBaru.setAttribute('spring','target:#anchor;stiffness:25;');
+                    scene.appendChild(boxBaru);
+
+                });
+            }
+        });
+    </script>
+
+    <a-scene id="scene" physics="debug:true">
+      <a-camera position="0 1.5 2">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <a-box
+        color="red"
+        id="anchor"
+        scale="0.5 0.5 0.5"
+        static-body
+        position="0 2.5 -3"
+        wireframe="true"
+      ></a-box>
+
+    <!-- <a-box
+        color="green"
+        id="moving"
+        constraint="target:#anchor; type:coneTwist; pivot:0 -0.5 0"
+        scale="4 0.2 1"
+        dynamic-body
+        position="0 3.5 -3"
+      ></a-box>  -->
+
+      <a-box 
+       boxgenerator
+      color="yellow" scale="0.2 0.2 0.2" position="0 1.5 -3"></a-box>
+
+      <a-plane
+        static-body
+        color="#222"
+        rotation="-90 0 0 "
+        scale="15 15 15"
+      ></a-plane>
+
+    </a-scene>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physics Testing</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("boxgenerator", {
+        init: function () {
+          let el = this.el;
+          el.addEventListener("click", function () {
+            let scene = document.querySelector("#scene");
+            let boxBaru = document.createElement("a-box");
+
+            let temp = Math.random() * 2 - 1;
+            boxBaru.setAttribute("position", `${temp} 7 -3`);
+            boxBaru.setAttribute("color", "red");
+            boxBaru.setAttribute("scale", "0.2 0.2 0.2");
+            boxBaru.setAttribute("dynamic-body", "shape:box");
+            boxBaru.setAttribute("spring", "target:#anchor;stiffness:25;");
+            scene.appendChild(boxBaru);
+          });
+        },
+      });
+
+      AFRAME.registerComponent("pushableobject", {
+        init: function () {
+          let el = this.el;
+          console.log("running");
+
+          el.addEventListener("collide", function (e) {
+            console.log(`${e.srcElement.id} is colliding`);
+          });
+
+          el.addEventListener("click", function () {
+            console.log("clicked");
+            let position = el.getAttribute("position");
+            let object_position = new THREE.Vector3(
+              position.x,
+              position.y,
+              position.z
+            );
+            let camPos = document
+              .querySelector("#cam")
+              .getAttribute("position");
+            let cam_position = new THREE.Vector3(camPos.x, camPos.y, camPos.z);
+            // let push_direction = object_position.sub(cam_position);
+            let push_direction = cam_position.sub(object_position);
+
+            push_direction = push_direction.normalize();
+            let power = 12;
+            push_direction.multiplyScalar(power);
+            // console.log(push_direction.normalize());
+
+            el.body.applyImpulse(
+              new CANNON.Vec3(-1 * push_direction.x, 0, -1 * push_direction.z),
+              new CANNON.Vec3().copy(object_position)
+            );
+          });
+        },
+      });
+    </script>
+
+    <a-scene id="scene" physics="debug:true;friction:0.01;">
+      <a-camera id="cam" position="0 1.5 2">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <a-sphere
+        src="texture/golf.jpg"
+        id="golf"
+        position="0 1.5 -3"
+        radius="0.2"
+        pushableobject
+        dynamic-body=" mass:2;"
+      ></a-sphere>
+
+      <a-sphere
+        id="red"
+        color="red"
+        position="0 1.5 -5"
+        radius="0.2" pushableobject
+        dynamic-body="linearDamping:0.1; mass:12; angularDamping:0.7;"
+      ></a-sphere>
+
+      <a-sphere
+        id="yellow"
+        color="yellow"
+        position="1 1.5 -5"
+        radius="0.2" pushableobject
+        dynamic-body="linearDamping:0.1; mass:12; angularDamping:0.7;"
+      ></a-sphere>
+
+      <a-plane
+        static-body
+        material="src:texture/grass.jpg; repeat:100 100"
+        width="100"
+        height="100"
+        rotation="-90 0 0 "
+        scale="15 15 15"
+      ></a-plane>
+    </a-scene>
+  </body>
+</html>

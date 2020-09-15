@@ -1,60 +1,82 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Location Based AR.js demo</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <title>GeoAR.js demo</title>
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script>
-      window.onload = () => {                       
-        navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
-        document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`)
-        document.querySelector('a-text').setAttribute('value', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`)
-        document.querySelector('#placeholder').innerHTML = `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`;
-
-      });
-     }
+      THREEx.ArToolkitContext.baseURL =
+        "https://raw.githack.com/jeromeetienne/ar.js/master/three.js/";
     </script>
   </head>
 
-  <body style="margin: 0; overflow: hidden;">
-    <div  style="top: 0px; left : 20px; z-index:5;position: absolute; display: block; padding: 4px; background-color: white;">
-       <div id="placeholder">
-
-       </div>
-       <a href="index1.html">Page 1</a>]
-       <a href="index2.html">Page 2</a>
-
+  <body style="margin: 0; overflow: hidden">
+    <div
+      style="
+        top: 0px;
+        left: 20px;
+        z-index: 5;
+        position: absolute;
+        display: block;
+        padding: 4px;
+        background-color: white;
+      "
+    >
+      <div id="placeholder"></div>
+      <a href="index.html">Page 1</a>]
+      <a href="index2.html">Page 2</a>
+      <a href="index3.html">Page 3</a>
     </div>
-    
+
     <a-scene
       vr-mode-ui="enabled: false"
       embedded
-      arjs="sourceType: webcam; debugUIEnabled: false;"
+      arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;"
     >
-
-    <!-- -6.172125, 106.827162 -->
-    <a-box material="color: yellow" scale="2 2 2 " gps-entity-place="latitude: -6.172125,  longitude: 106.827162" 
-    position="0 30 0"/>  
-
-    <!-- -6.175268, 106.823680 -->
-    <a-box material="color: red" scale="2 2 2 " gps-entity-place="latitude: -6.175268,  longitude: 106.823680" 
-    position="0 30 0"/>  
-
-    <!-- -6.175492, 106.829677 -->
-    <a-box material="color: blue" scale="2 2 2 " gps-entity-place="latitude: -6.175492,  longitude: 106.829677" 
-    position="0 30 0"/>  
-    
-     <a-text
-  
-     value="No markers around"
+      <a-text
+        value="ABC 10"
         look-at="[gps-camera]"
-        scale="5 5 5"
-      ></a-text>
-      <a-camera gps-camera="simulateLatitude: -6.175578 ;simulatelongitude: 106.827200" rotation-reader> </a-camera>
-     
+        scale="12 12 12"
+        gps-entity-place="longitude:  107.604715; latitude: -6.918517;"
+      >
+        <a-box
+          color="red"
+          animation="property:rotation; from:0 0 0; to:0 180 0; loop:true;"
+        >
+        </a-box>
+      </a-text>
+
+      <a-text
+        value="BCA"
+        look-at="[gps-camera]"
+        scale="12 12 12"
+        gps-entity-place="longitude: 107.605133; latitude: -6.918480;"
+      >
+        <a-box
+          color="green"
+          animation="property:rotation; from:0 0 0; to:0 180 0; loop:true;"
+        >
+        </a-box>
+      </a-text>
+
+      <a-text
+        value="Alun alun"
+        look-at="[gps-camera]"
+        scale="12 12 12"
+        gps-entity-place="longitude:  107.607027; latitude: -6.923304;"
+      >
+        <a-box
+          position="0 -1 0"
+          color="yellow"
+          animation="property:rotation; from:0 0 0; to:0 180 0; loop:true;"
+        >
+        </a-box>
+      </a-text>
+
+      <a-camera gps-camera rotation-reader></a-camera>
     </a-scene>
   </body>
 </html>
