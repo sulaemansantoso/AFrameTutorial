@@ -12,25 +12,28 @@
       AFRAME.registerComponent("jumpball", {
         init: function () {
           let el = this.el;
-          console.log('inited');
+          console.log("inited");
 
-          el.addEventListener("body-loaded", function () {
-              console.log("loaded");
-            document.addEventListener("keydown", function (e) {
+          document.addEventListener("keydown", function (e) {
               console.log("jump");
 
               let position = el.getAttribute("position");
               let object_position = new THREE.Vector3(
                 position.x,
-                position.y-1,
+                position.y - 1,
                 position.z
               );
 
               el.body.applyImpulse(
-                new CANNON.Vec3(0, 20, 0),
-                new CANNON.Vec3(0, 0, 0),
+                new CANNON.Vec3(0, 5 , 0),
+                new CANNON.Vec3(0, 0, 0)
               );
             });
+
+          el.addEventListener("body-loaded", function () {
+            console.log("loaded");
+
+       
           });
         },
       });
@@ -39,11 +42,9 @@
         init: function () {
           let el = this.el;
 
-          el.addEventListener("collide", function (ev) {
-          });
+          el.addEventListener("collide", function (ev) {});
 
           el.addEventListener("click", function () {
-           
             let position = el.getAttribute("position");
             let object_position = new THREE.Vector3(
               position.x,
@@ -91,7 +92,7 @@
         position="0 0 -5"
       ></a-box>
       <a-sphere
-      jumpball
+        jumpball
         id="red"
         pushableobject
         radius="0.2"
