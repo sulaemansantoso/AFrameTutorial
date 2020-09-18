@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ges</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-entity-generator-component@3.0.2/dist/aframe-entity-generator-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-mixin id="red" material="color: red"></a-mixin>
+        <a-mixin id="candle" geometry="primitive: sphere" light></a-mixin>
+      </a-assets>
+
+      <a-entity entity-generator="mixin: red candle"></a-entity>
+    </a-scene>
+  </body>
+</html>

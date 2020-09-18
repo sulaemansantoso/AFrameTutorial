@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyboard Example</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <script>
+      document.addEventListener("keydown", (e) => {
+        let box = document.querySelector("#box");
+        let pos = box.getAttribute("position");
+        let new_pos = new THREE.Vector3(pos.x, pos.y, pos.z);
+
+        let speed = 0.1;
+        if (e.key == "w") {
+          new_pos.z -= speed;
+        }
+        if (e.key == "s") {
+          new_pos.z += speed;
+        }
+        if (e.key == "a") {
+          new_pos.x -= speed;
+        }
+        if (e.key == "d") {
+          new_pos.x += speed;
+        }
+        console.log(new_pos);
+        let position_String = `${new_pos.x} ${new_pos.y} ${new_pos.z}`;
+  
+        box.setAttribute('position',`${new_pos.x} ${new_pos.y} ${new_pos.z}`);
+
+      });
+      AFRAME.registerComponent("keyboardhandler", {
+        init: function () {
+          console.log("init");
+          let el = this.el;
+
+          el.addEventListener("onKeydown", function (e) {
+            console.log(e);
+          });
+        },
+      });
+    </script>
+    <a-scene>
+      <a-entity camera position="0 1.5 0"></a-entity>
+      <a-grid src="./texture/grid_tile.png"></a-grid>
+      <a-box color="red" position="0 1.5 -5" id="box"></a-box>
+    </a-scene>
+  </body>
+</html>

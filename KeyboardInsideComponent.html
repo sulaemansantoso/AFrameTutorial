@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physics Scripting</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("jumpball", {
+        init: function () {
+          let el = this.el;
+          console.log('inited');
+
+          el.addEventListener("body-loaded", function () {
+              console.log("loaded");
+            document.addEventListener("keydown", function (e) {
+              console.log("jump");
+
+              let position = el.getAttribute("position");
+              let object_position = new THREE.Vector3(
+                position.x,
+                position.y-1,
+                position.z
+              );
+
+              el.body.applyImpulse(
+                new CANNON.Vec3(0, 20, 0),
+                new CANNON.Vec3(0, 0, 0),
+              );
+            });
+          });
+        },
+      });
+
+      AFRAME.registerComponent("pushableobject", {
+        init: function () {
+          let el = this.el;
+
+          el.addEventListener("collide", function (ev) {
+          });
+
+          el.addEventListener("click", function () {
+           
+            let position = el.getAttribute("position");
+            let object_position = new THREE.Vector3(
+              position.x,
+              position.y,
+              position.z
+            );
+
+            let position_cam = document
+              .querySelector("#cam")
+              .getAttribute("position");
+            let cam_pos = new THREE.Vector3(
+              position_cam.x,
+              position_cam.y,
+              position_cam.z
+            );
+
+            let direction = cam_pos.sub(object_position); // ke arah camera (towards camera)
+
+            direction = direction.normalize();
+            let speed = -10;
+            direction = direction.multiplyScalar(speed);
+
+            el.body.applyImpulse(
+              new CANNON.Vec3(direction.x, 0, direction.z), // ke arah z - (away from camera)
+              new CANNON.Vec3().copy(object_position)
+            );
+          });
+        },
+      });
+    </script>
+
+    <a-scene physics="debug:true;">
+      <a-camera id="cam">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <a-box
+        shadow
+        rotation="-90 0 0"
+        color="#888"
+        static-body
+        width="10"
+        height="10"
+        depth="0.2"
+        position="0 0 -5"
+      ></a-box>
+      <a-sphere
+      jumpball
+        id="red"
+        pushableobject
+        radius="0.2"
+        color="red"
+        shadow
+        dynamic-body="mass:5;"
+        position="0 1.5 -3"
+      ></a-sphere>
+      <a-sphere
+        id="green"
+        pushableobject
+        radius="0.2"
+        color="green"
+        shadow
+        dynamic-body="mass:50"
+        position="2 1.5 -5"
+      ></a-sphere>
+      <a-sphere
+        id="blue"
+        pushableobject
+        radius="0.2"
+        color="blue"
+        shadow
+        dynamic-body="mass:500"
+        position="-2 1.5 -5"
+      ></a-sphere>
+    </a-scene>
+  </body>
+</html>

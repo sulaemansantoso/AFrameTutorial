@@ -1,82 +1,41 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>GeoAR.js demo</title>
-    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script>
-      THREEx.ArToolkitContext.baseURL =
-        "https://raw.githack.com/jeromeetienne/ar.js/master/three.js/";
-    </script>
-  </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChenzAR</title>
 
-  <body style="margin: 0; overflow: hidden">
-    <div
-      style="
-        top: 0px;
-        left: 20px;
-        z-index: 5;
-        position: absolute;
-        display: block;
-        padding: 4px;
-        background-color: white;
-      "
-    >
-      <div id="placeholder"></div>
-      <a href="index.html">Page 1</a>]
-      <a href="index2.html">Page 2</a>
-      <a href="index3.html">Page 3</a>
-    </div>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@master/dist/aframe-master.min.js"></script>
+    <script src="https://google-ar.github.io/three.ar.js/dist/three.ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/chenzlabs/aframe-ar@master/dist/aframe-ar.min.js"></script>
+    
 
-    <a-scene
-      vr-mode-ui="enabled: false"
-      embedded
-      arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;"
-    >
-      <a-text
-        value="ABC 10"
-        look-at="[gps-camera]"
-        scale="12 12 12"
-        gps-entity-place="longitude:  107.604715; latitude: -6.918517;"
-      >
-        <a-box
-          color="red"
-          animation="property:rotation; from:0 0 0; to:0 180 0; loop:true;"
-        >
-        </a-box>
-      </a-text>
+</head>
+<body>
 
-      <a-text
-        value="BCA"
-        look-at="[gps-camera]"
-        scale="12 12 12"
-        gps-entity-place="longitude: 107.605133; latitude: -6.918480;"
-      >
-        <a-box
-          color="green"
-          animation="property:rotation; from:0 0 0; to:0 180 0; loop:true;"
-        >
-        </a-box>
-      </a-text>
+    <script type="text/javascript">
+        function onSceneLoaded() {
+          const raycaster = document.querySelector('[ar-raycaster]');
+          const cursor = document.querySelector('#cursor');
+          raycaster.addEventListener('raycaster-intersection', (event) => {
+            cursor.setAttribute('position', event.detail.intersections[0].point);
+          });
+        }
+      
+        const scene = document.querySelector('a-scene');
+        scene.addEventListener('loaded', onSceneLoaded);
+      </script>
 
-      <a-text
-        value="Alun alun"
-        look-at="[gps-camera]"
-        scale="12 12 12"
-        gps-entity-place="longitude:  107.607027; latitude: -6.923304;"
-      >
-        <a-box
-          position="0 -1 0"
-          color="yellow"
-          animation="property:rotation; from:0 0 0; to:0 180 0; loop:true;"
-        >
-        </a-box>
-      </a-text>
+<a-scene ar>
 
-      <a-camera gps-camera rotation-reader></a-camera>
-    </a-scene>
-  </body>
+    <a-camera ar-raycaster raycaster cursor="fuse:false">
+        <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"  
+        color="teal" position="0 -0.8 -5" rotation="-90 0 0">
+        </a-ring>
+
+    </a-camera>
+    <!-- <a-box color="red" position="0 1.5 -3"></a-box> -->
+    <a-gltf-model src="model/Oni.glb" position="0 0 -5"></a-gltf-model>
+<a-scene>   
+</body>
 </html>
