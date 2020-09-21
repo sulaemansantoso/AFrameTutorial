@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChenzAR</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@master/dist/aframe-master.min.js"></script>
+    <script src="https://google-ar.github.io/three.ar.js/dist/three.ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/chenzlabs/aframe-ar@master/dist/aframe-ar.min.js"></script>
+    
+
+</head>
+<body>
+
+    <script type="text/javascript">
+        function onSceneLoaded() {
+          const raycaster = document.querySelector('[ar-raycaster]');
+          const cursor = document.querySelector('#cursor');
+          raycaster.addEventListener('raycaster-intersection', (event) => {
+            cursor.setAttribute('position', event.detail.intersections[0].point);
+          });
+        }
+      
+        const scene = document.querySelector('a-scene');
+        scene.addEventListener('loaded', onSceneLoaded);
+      </script>
+
+<a-scene ar>
+
+    <a-camera ar-raycaster raycaster cursor="fuse:false">
+        <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"  
+        color="teal" position="0 -0.8 -5" rotation="-90 0 0">
+        </a-ring>
+
+    </a-camera>
+    <!-- <a-box color="red" position="0 1.5 -3"></a-box> -->
+    <a-gltf-model src="model/Oni.glb" position="0 0 -5"></a-gltf-model>
+<a-scene>   
+</body>
+</html>

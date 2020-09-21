@@ -1,41 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChenzAR</title>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>GeoAR.js demo</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+  </head>
 
-    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@master/dist/aframe-master.min.js"></script>
-    <script src="https://google-ar.github.io/three.ar.js/dist/three.ar.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/chenzlabs/aframe-ar@master/dist/aframe-ar.min.js"></script>
-    
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      AFRAME.registerComponent("boxgenerator", {
+        init: function () {
+          this.el.addEventListener("click", function () {
+            console.log("go");
+            let scene = document.querySelector("#scene");
+            let box = document.createElement("a-box");
+            box.setAttribute("dynamic-body", "shape:box;");
+            let x = Math.random() * 2.0 - 1;
+            //box.setAttribute("position", `${x} 3 -3`);
+            box.setAttribute("scale", `2 2 2`);
+            // gps-entity-place="latitude:-6.173641 ; longitude:106.827138 ;"
+            let lat = -6.173641;
+            let long = 106.827138;
+            box.setAttribute(
+              "gps-entity-place",
+              `latitude:${lat} ;longitude:${long + x / 100000}`
+            );
 
-</head>
-<body>
-
-    <script type="text/javascript">
-        function onSceneLoaded() {
-          const raycaster = document.querySelector('[ar-raycaster]');
-          const cursor = document.querySelector('#cursor');
-          raycaster.addEventListener('raycaster-intersection', (event) => {
-            cursor.setAttribute('position', event.detail.intersections[0].point);
+            box.setAttribute("color", "#F00");
+            scene.appendChild(box);
           });
-        }
-      
-        const scene = document.querySelector('a-scene');
-        scene.addEventListener('loaded', onSceneLoaded);
-      </script>
+        },
+      });
+    </script>
+    <a-scene
+      physics="debug:true;"
+      id="scene"
+      vr-mode-ui="enabled: false"
+      embedded
+      arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;"
+    >
+      <a-camera>
+        <a-cursor fuseTimeout="500"></a-cursor>
+      </a-camera>
 
-<a-scene ar>
+      <a-text
+        align="center"
+        value="Patung Thamrin."
+        look-at="[gps-camera]"
+        scale="15 15 15"
+        gps-entity-place="latitude:-6.175472 ; longitude:106.824920 "
+        ><a-box color="green" position="0 -0.5 0" scale="0.5 0.5 0.5"></a-box>
+      </a-text>
 
-    <a-camera ar-raycaster raycaster cursor="fuse:false">
-        <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"  
-        color="teal" position="0 -0.8 -5" rotation="-90 0 0">
-        </a-ring>
+      <a-text
+        align="center"
+        value="Patung Kartini."
+        look-at="[gps-camera]"
+        scale="15 15 15"
+        gps-entity-place="latitude:-6.175584 ; longitude:106.829402 ;"
+        ><a-box color="yellow" position="0 -0.5 0" scale="0.5 0.5 0.5"></a-box>
+      </a-text>
 
-    </a-camera>
-    <!-- <a-box color="red" position="0 1.5 -3"></a-box> -->
-    <a-gltf-model src="model/Oni.glb" position="0 0 -5"></a-gltf-model>
-<a-scene>   
-</body>
+      <a-text
+        align="center"
+        value="Patung Diponogoro."
+        look-at="[gps-camera]"
+        scale="15 15 15"
+        gps-entity-place="latitude:-6.173641 ; longitude:106.827138 ;"
+      >
+        <a-box
+          boxgenerator
+          color="red"
+          position="0 -0.5 0"
+          scale="0.5 0.5 0.5"
+        ></a-box>
+      </a-text>
+
+      <a-box
+        static-body
+        scale="50 50 1"
+        rotation="-90 0 0 "
+        position="0 -25 0"
+        gps-entity-place="latitude:-6.173641 ; longitude:106.827138 ;"
+      ></a-box> 
+
+      <!-- camera in monas -->
+      <a-camera
+        gps-camera="
+         simulateLatitude:-6.175582;
+         simulateLongitude:106.827210;
+         "
+        rotation-reader
+      >
+      </a-camera>
+    </a-scene>
+  </body>
 </html>
