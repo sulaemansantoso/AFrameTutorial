@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gui example</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js "></script>
+
+    <script>
+      function testInputAction() {
+        let input = document.querySelector("#test_input");
+        let hasil = input.getAttribute("value");
+        console.log("isi dari input : " + hasil);
+        input.setAttribute("text", "ini hasil");
+      }
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity id="cameraRig" position="0 1.6 0">
+        <a-camera look-controls wasd-controls position="0 0 0">
+          <a-gui-cursor
+            id="cursor"
+            raycaster="objects: [gui-interactable]"
+            fuse="true"
+            fuse-timeout="2000"
+            design="ring"
+          >
+          </a-gui-cursor>
+          <!-- /cursor -->
+        </a-camera>
+        <!-- /camera -->
+      </a-entity>
+
+      <a-gui-flex-container
+        opacity="0.6"
+        width="4"
+        height="2"
+       
+        position="0 1.5 -4"
+      >
+
+    </a-gui-flex-container>
+    </a-scene>
+  </body>
+</html>

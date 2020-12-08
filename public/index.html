@@ -9,7 +9,7 @@
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
     <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
   </head>
-
+  
   <body style="margin: 0; overflow: hidden">
     <script>
       AFRAME.registerComponent("boxgenerator", {
@@ -41,7 +41,7 @@
       id="scene"
       vr-mode-ui="enabled: false"
       embedded
-      arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;"
+      arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: true;"
     >
       <a-camera>
         <a-cursor fuseTimeout="500"></a-cursor>

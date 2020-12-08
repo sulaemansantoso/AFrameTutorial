@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events2</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+  
+</head>
+<body>
+
+    <script>
+        let number = 0;
+        AFRAME.registerComponent('incrementer', {
+            schema : {
+                inc : {type:'number', default:-1}
+            },
+            init : function () {
+                let el = this.el;
+                let data = this.data;
+                el.addEventListener('click', function() {
+                    number += data.inc;
+                    let textC = document.querySelector("#text1");
+                    el.emit('checkNumber',{},true);
+                    console.log(number);
+                })
+            },
+        });
+
+        AFRAME.registerComponent('numberdisplayer', {
+            init : function() {
+                let el = this.el;
+                let textC = document.querySelector('#text1');
+                textC.setAttribute('value',number+"");
+
+                el.addEventListener('checkNumber', function() {
+                    console.log('checking number');
+                    textC.setAttribute('value',number+"");
+                    if (number > 5){
+                        textC.setAttribute('color','red');
+                    }
+                    else {
+                        textC.setAttribute('color','green');
+                    }
+                })
+            }
+        });
+    </script>
+
+    <a-scene numberdisplayer >
+        <a-camera>
+            <a-cursor 
+            raycaster="objects:a-box;"></a-cursor>
+        </a-camera>
+
+        <a-box incrementer position="-2 1.5 -3" color="yellow"></a-box>
+        <a-text
+            id="text1"
+            value="hello"
+            position="0 1.5 -3"
+            color="red"
+            align="center"
+            geometry="primitive:plane;"
+            material="color:#aaaaaa"
+            
+        ></a-text>
+        <a-box incrementer="inc:1" position="2 1.5 -3" color="yellow"></a-box>
+    </a-scene>   
+</body>
+</html>

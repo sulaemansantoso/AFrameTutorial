@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events2</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+  
+</head>
+<body>
+
+    <script>
+        AFRAME.registerComponent('receiver', {
+            init :function() {
+                console.log('receiver intialized');
+                this.el.addEventListener('received', function() {
+                    console.log('receive signal');
+                });
+            }
+        });
+        AFRAME.registerComponent('emitter', {
+            init : function() {
+                console.log("component initialized");
+                let el = this.el;
+                this.el.addEventListener('click',function() {
+                    console.log("clicked");
+                    el.emit('received',{}, true);
+                });
+            },
+        });
+    </script>
+
+    <a-scene >
+        <a-camera>
+            <a-cursor 
+            raycaster="objects:a-box;"></a-cursor>
+        </a-camera>
+        <a-box  receiver position="-2 1.5 -3" color="red"></a-box>
+        <a-box   emitter position="0 1.5 -3" color="green"></a-box>
+        <a-box position="2 1.5 -3" color="blue"></a-box>
+
+    </a-scene>   
+</body>
+</html>
