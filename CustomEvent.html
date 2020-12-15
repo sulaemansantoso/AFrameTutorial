@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Event</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent("display", {
+        schema: {
+          angka: {
+            type: "number",
+            default: 1,
+          },
+        },
+        init: function () {
+          let el = this.el;
+          let data = this.data;
+          el.setAttribute("value", `${data.angka}`);
+          el.addEventListener("increment", function (event) {
+            console.log(`${event.detail.amount}`);
+            data.angka += event.detail.amount;
+            el.setAttribute("value", `${data.angka}`);
+          });
+        },
+      });
+      AFRAME.registerComponent("incrementer", {
+        schema: {
+          inc_amount: {
+            type: "number",
+            default: 1,
+          },
+        },
+        init: function () {
+          let el = this.el;
+          let data = this.data;
+          el.addEventListener("click", function () {
+            let disp = document.querySelector("#text1");
+            disp.emit("increment", { amount: data.inc_amount }, false);
+          });
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene contoh2>
+      <a-camera>
+        <a-cursor raycaster="objects:a-box"> </a-cursor>
+      </a-camera>
+      <a-box position="-2 1.5 -3" color="yellow" incrementer="inc_amount:-1">
+      </a-box>
+      <a-text
+        display
+        id="text1"
+        value="contoh"
+        position="0 1.5 -3"
+        color="black"
+        align="center"
+        width="10"
+      ></a-text>
+      <a-box position="2 1.5 -3" color="green" id="box2" incrementer> </a-box>
+    </a-scene>
+  </body>
+</html>
