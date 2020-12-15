@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Event</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+
+        AFRAME.registerComponent('clicker', {
+            init : function() {
+                let el = this.el;
+                el.addEventListener('click', function(){
+                    console.log('this works');
+                    let box = document.querySelector("#box1");
+                    el.emit('special',{} ,true);
+                });
+            }
+        });
+    </script>
+
+</head>
+  <body>
+    <a-scene>
+        <a-camera>
+            <a-cursor raycaster="objects:a-entity"> </a-cursor>
+        </a-camera>
+      <a-box position="0 1.5 -3" color="red" id="box1" animation="property:rotation;from:0 0 0;to:0 360 0; dur:2000;startEvents:special;" >
+        <a-entity
+        clicker
+          text="value:'click me';align:center; width:5"
+          geometry="primitive:plane"
+          material="color:#222"
+          position="0 1.2 -0.5"
+          animation="property:rotation;from:0 0 0;to:0 -360 0; dur:2000;startEvents:special;"    
+        >
+        </a-entity>
+      </a-box>
+    </a-scene>
+  </body>
+</html>
