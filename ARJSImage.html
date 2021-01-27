@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARJS Image Tracker</title>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+</head>
+
+
+<body style="margin : 0px; overflow: hidden;">
+    <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
+    <div class="arjs-loader">
+        <div>Loading, please wait...</div>
+    </div>
+
+    <!-- a-frame scene -->
+    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+        <a-box position="0 0.5 0" color="red"></a-box>
+        <a-nft type="nft" url="./image_marker/mandalorian" smooth="true" smoothCount="10" smoothTolerance=".01"
+            smoothThreshold="5">
+            <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+             <a-box position="0 0.5 0" color="red"></a-box>
+        </a-nft>
+        <!-- static camera that moves according to the device movemenents -->
+        <a-entity camera></a-entity>
+    </a-scene>
+
+</body>
+
+</html>

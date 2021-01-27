@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFrame GUI Tutorial</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js "></script>
+    <script>
+        function startCount() {
+            let loader = document.querySelector("#loader1");
+
+            let count = loader.getAttribute('count');
+            console.log(`${count}`);
+            loader.setAttribute('count', "20");
+        }
+
+        let duration = 0;
+        let intervalFunction;
+        function startTimer() {
+            let timer = document.querySelector("#timer1");
+            duration = timer.getAttribute('count-down');
+            intervalFunction = setInterval(counting, 1000);
+        }
+
+        function counting() {
+            duration = duration -= 1;
+            if (duration == 0) {
+                clearInterval(intervalFunction);
+                let textBox = document.querySelector("#text1");
+                textBox.components["gui-input"].appendText("it is finished");
+            }
+            document.querySelector("#timer1").setAttribute('count-down', duration);
+        }
+
+        window.timedout = function () {
+            console.log("GUI timer timed out");
+        }
+
+        function clearText() {
+            let textBox = document.querySelector("#text1");
+            let kalimat = textBox.getAttribute("gui-input");
+            console.log(kalimat);
+
+            textBox.setAttribute("gui-input","text","");
+        }
+
+    </script>
+</head>
+
+<body onload="startTimer()">
+    <a-scene>
+
+        <a-camera>
+            <a-gui-cursor raycaster="objects:[gui-interactable]" fuse="false" ; fuse-timeout="4000" design="cross">
+            </a-gui-cursor>
+        </a-camera>
+
+        <a-gui-flex-container item-padding="15.0" justify-content="flexEnd" panel-color="#ff0000" height=4
+            flex-direction="row" width="3" height="1" opacity="0.5" align-items="center" position="0 1.5 -3">
+            <a-gui-icon-button height=1 icon="social-twitter   " value="A "></a-gui-icon-button>
+            <a-gui-circle-timer id="timer1" height="0.75" font-family="Arial" margin="0 0 0.05 0" count-down="4"
+                callback="timedout">
+            </a-gui-circle-timer>
+            <a-gui-button value="D" height=1 onclick="startCount();"></a-gui-button>
+            <a-gui-flex-container flex-direction="column" width="1" height="1" opacity="0.5" align-items="flexEnd">
+                <a-gui-button value="A" onclick="clearText"></a-gui-button>
+                <a-gui-button value="D"></a-gui-button>
+                <a-gui-button value="C"></a-gui-button>
+            </a-gui-flex-container>
+            <a-gui-flex-container item-padding="2.5" flex-direction="column" width="1" height="1" opacity="0.5"
+                justify-content="flexStart" align-items="flexStart">
+                <a-gui-button value="A"></a-gui-button>
+                <a-gui-label value="contoh label" width=5 background-color="#ff0000"></a-gui-label>
+                <a-gui-input value="example" width="5" id="text1"></a-gui-input>
+            </a-gui-flex-container>
+        </a-gui-flex-container>
+
+    </a-scene>
+</body>
+
+</html>

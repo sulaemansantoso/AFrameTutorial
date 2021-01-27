@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFrame GUI Tutorial</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js "></script>
+    <script>
+
+        function contohFunction() {
+            alert("contoh function");
+        }
+        function initTextField() {
+            let textBox = document.querySelector("#input1");
+            textBox.components["gui-input"].appendText("contoh input");
+            textBox.components["gui-input"].delete();
+        }
+
+        function clear() {
+            let textBox = document.querySelector("#input1");
+            textBox.setAttribute('gui-input', 'text', '');
+        }
+    </script>
+
+</head>
+
+<body>
+    <a-scene>
+        <a-camera>
+            <a-gui-cursor design="cross" fuse="false" fuse-timeout="3000" raycast="objects:[gui-interactable]">
+            </a-gui-cursor>
+        </a-camera>
+        <a-gui-flex-container panel-color="#FF0000" align-items="middle" flex-direction="column" width=5 height=5
+            opacity=0.5 position="0 1.5 -3">
+            <a-gui-flex-container flex-direction="row">
+                <a-gui-button value="A" onclick="alert('hello');"></a-gui-button>
+                <a-gui-button value="B" onclick="contohFunction"></a-gui-button>
+                <a-gui-button value="C"></a-gui-button>
+            </a-gui-flex-container>
+            <a-gui-flex-container flex-direction="row">
+                <a-gui-button value="A" onclick="clear"></a-gui-button>
+                <!-- top  right bottom left-->
+                <a-gui-button key-code="32" value="B" onclick="alert('tombol space')"></a-gui-button>
+                <a-gui-button value="C" onclick="initTextField"> </a-gui-button>
+            </a-gui-flex-container>
+            <a-gui-flex-container flex-direction="row">
+                <a-gui-label value="ini label"></a-gui-label>
+                <a-gui-input id="input1" width="2" value="satu dua"></a-gui-input>
+            </a-gui-flex-container>
+        </a-gui-flex-container>
+
+    </a-scene>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://libs.zappar.com/zappar-aframe/0.2.4/zappar-aframe.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-assets>
+            <a-asset-item id="target-file" src="./texture/sky.zpt"/>
+        </a-assets>
+        <a-entity camera zappar-camera></a-entity>  
+         <a-entity zappar-image="#target-file">
+            <a-box color=red scale="1 1 1"></a-box>
+        </a-entity>
+    </a-scene>
+</body>
+</html>
