@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal AR 2</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://libs.zappar.com/zappar-aframe/0.2.3/zappar-aframe.js"></script>
+  </head>
+<body>
+    <a-scene>
+        <a-entity camera zappar-camera="user-facing:true;"></a-entity>
+        <a-entity zappar-face id="muka_kita">
+            
+            <a-entity zappar-head-mask="face:#muka_kita"></a-entity>
+            <!-- <a-entity geometry="primitive:face-mesh;
+                face:#muka_kita; fill-mouth:true;
+                fill-eye-left:true; fill-eye-right:true;"
+                material="src:#material1;transparent:true;"
+            ></a-entity> -->
+            <a-gltf-model src="model/glasses/scene.gltf" scale="0.0035 0.0035 0.0035"
+              position="0 0.05 1"
+            ></a-gltf-model>
+        </a-entity>
+        <script>
+            let muka_entity = document.querySelector("#muka_kita");
+
+            muka_entity.addEventListener('zappar-visible', function() {
+                console.log('keliatan');
+                let box_saya = document.querySelector("#box1");
+                box_saya.setAttribute('visible','true');
+            });
+
+            muka_entity.addEventListener('zappar-notvisible', function() {
+                console.log('tidak ada muka');
+                let box_saya = document.querySelector("#box1");
+                box_saya.setAttribute('visible','false');
+            });
+
+        </script>
+    </a-scene>
+</body>
+</html>

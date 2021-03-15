@@ -1,18 +1,44 @@
 <html>
-  <head>
-    <title>Text Component</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://libs.zappar.com/zappar-aframe/0.2.3/zappar-aframe.js"></script>
-  </head>
 
-  <body>
-    <a-scene>
-        <a-entity camera zappar-camera="user-facing: true;"></a-entity>
+<head>
+  <title>Text Component</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://libs.zappar.com/zappar-aframe/0.2.3/zappar-aframe.js"></script>
+</head>
 
-        <a-entity  zappar-face>
-         
-            <a-box color="#ff0000"></a-box>
-        </a-entity>
-    </a-scene>
-  </body>
+<body>
+  <a-scene>
+    <a-entity camera zappar-camera="user-facing: true;"></a-entity>
+
+    <a-entity zappar-face id="my-face-tracker">
+      <a-box scale="0.2 0.2 0.2" id="box1" visible="false" ></a-box>
+      <a-entity zappar-head-mask="face: #my-face-tracker;"></a-entity>
+
+      <a-gltf-model src="model/glasses/scene.gltf" scale="0.0035 0.0035 0.0035" position="0 0.05 1"></a-gltf-model>
+
+      <a-entity geometry="primitive: face-mesh;  face: #my-face-tracker; fill-mouth: true; fill-eye-right: true;  "
+        material="src:texture/banner.png; transparent: true;side:double;">
+
+      </a-entity>
+    </a-entity>
+
+    <script>
+      let myFaceTracker = document.getElementById("my-face-tracker");
+
+      myFaceTracker.addEventListener("zappar-visible", () => {
+        console.log("Face has become visible");
+        let  box = document.querySelector("#box1");
+        box.setAttribute("visible","true");
+      });
+
+      myFaceTracker.addEventListener("zappar-notvisible", () => {
+        console.log("Face is no longer visible");
+        let  box = document.querySelector("#box1");
+        box.setAttribute("visible","false");
+      });
+    </script>
+
+  </a-scene>
+</body>
+
 </html>

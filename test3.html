@@ -1,0 +1,41 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js">
+        </script>
+</head>
+
+<body>
+    <a-scene animation-timeline1="timeline:#mytimeline">
+        <a-assets>
+            <a-timeline id="mytimeline">
+                <a-timeline-animation select="#orang" name="moveone"></a-timeline-animation>
+                <a-timeline-animation select="#orang" name="movetwo"></a-timeline-animation>
+                <a-timeline-animation select="#orang" name="movethree"></a-timeline-animation>
+                <a-timeline-animation select="#orang" name="movefour"></a-timeline-animation>
+            </a-timeline>
+
+
+            <!-- <a-mixin id="obj" animation__moveone="property:position; from:0 1.5 0; to :0 1.5 5; dur:7000; "
+                animation__movetwo="property:position; from:-6.590 2.525 16.848; to :-5.820 3.235 4.718; dur:7000; "
+                animation__movethree="property:position; from:-5.820 3.235 4.718; to :-7.227 5.468 -3.780; dur:5000; "
+                animation__movefour="property:position; from:-7.227 5.468 -3.780; to :-0.352 5.468 -4.309; dur:6000; ">
+            </a-mixin> -->
+        </a-assets>
+
+        <a-gltf-model src="model/MonkeyWithAnimation.gltf" position="0 0.5 -5"></a-gltf-model>
+        <a-camera  animation="property:position; from:0 1.5 0; to :0 1.5 5; dur:7000; "></a-camera>
+        <!-- <a-entity id="orang" position="0 0 0" camera wasd-controls look-controls mixin="obj"></a-entity> -->
+
+        <a-sky color="#1F2128"></a-sky>
+
+    </a-scene>
+</body>
+
+</html>
