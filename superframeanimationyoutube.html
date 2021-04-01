@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superframe animation</title>
+
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-animation-component@^4.1.1/dist/aframe-animation-timeline-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-animation-timeline-component@1.6.0/dist/aframe-animation-timeline-component.min.js"></script>
+
+</head>
+
+<body>
+    <a-scene animation-timeline="timeline: #myTimeline; loop: true">
+        <a-timeline id="myTimeline">
+
+            <a-timeline-animation select="#box1" name="dua"></a-timeline-animation>
+            <a-timeline-animation select="#box1" name="satu"></a-timeline-animation>
+            <a-timeline-animation select="#box1" name="tiga"></a-timeline-animation>
+            <a-timeline-animation select="#box1" name="satu"></a-timeline-animation>
+      
+        </a-timeline>
+
+        <a-box id="box1" color="red" position="0 1.5 -5"
+            animation__satu="property:rotation; from: 0 0 0; to: 0 360 0;dur:2000;autoplay:false" ;
+            animation__dua="property:position; from: 0 1.5 -5; to: 0 1.5 -10;dur:2000; autoplay:false" ;
+            animation__tiga="property:position; from: 0 1.5 -10; to: 0 1.5 -5;dur:2000; autoplay:false" ;></a-box>
+
+    </a-scene>
+</body>
+
+</html>

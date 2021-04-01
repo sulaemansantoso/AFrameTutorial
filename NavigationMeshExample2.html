@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superframe animation</title>
+
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.js"></script>
+    <script>
+        AFRAME.registerComponent('nav-pointer', {
+            init: function () {
+                const el = this.el;// On click, send the NPC to the target location.
+                el.addEventListener('click', (e) => {
+                    const ctrlEl = el.sceneEl.querySelector('[nav-agent]');
+                    ctrlEl.setAttribute('nav-agent', {
+                        active: true,
+                        destination: e.detail.intersection.point
+                    });
+                });    // When hovering on the nav mesh, show a green cursor.
+                el.addEventListener('mouseenter', () => {
+                    el.setAttribute('material', { color: 'green' });
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.setAttribute('material', { color: 'crimson' })
+                });
+
+                // Refresh the raycaster after models load.
+                el.sceneEl.addEventListener('object3dset', () => {
+                    this.el.components.raycaster.refreshObjects();
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <a-scene inspector-plugin-recast>
+
+        <a-box src="texture/grass.jpg" repeat="20 20" width="55" height="55" depth="0.2" rotation="-90 0 0"></a-box>
+        <a-gltf-model src="model/fieldNavMeshBlender.glb" nav-mesh position="0 -0.6 0" visible="false"></a-gltf-model>
+
+
+        <a-box src="texture/Brick/basecolor.jpg" repeat="1 8" width="2" height=5 depth="2" position="5 2.5 5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" repeat="1 8" width="2" height=5 depth="2" position="2 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" repeat="1 8" width="2" height=5 depth="2" position="-3 2.5 3"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" repeat="1 8" width="2" height=5 depth="2" position="-5 2.5 -3"></a-box>
+
+        <a-entity position="0 0 10" movement-controls="constrainToNavMesh:true;">
+            <a-entity camera position="0 1.5 0" look-controls>
+                <a-cursor nav-pointer    raycast="objects:[nav-agent]"></a-cursor>
+            </a-entity>
+        </a-entity>
+
+        <!-- <a-entity position="0 0 5" movement-controls="constrainToNavMesh:true;">
+            <a-entity camera position="0 1.5 0" look-controls>
+                <a-cursor></a-cursor>
+            </a-entity>
+        </a-entity> -->
+
+
+        <a-box nav-agent color="red" position="0 0.7 0"></a-box>
+    </a-scene>
+    <script>
+        var position = {
+            x: 0,
+            y: 0,
+            z: 0
+        }
+        anime({
+            loop: true,
+            direction: 'alternate',
+            targets: position,
+            x: 2,
+            y: 5,
+            duration: 2000,
+            easing: 'linear',
+            update: function () {
+                document.querySelector("#box").setAttribute('position', `${position.x} ${position.y} ${position.z} `);
+
+            }
+        });
+    </script>
+</body>
+
+</html>

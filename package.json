@@ -9,7 +9,8 @@
   "dependencies": {
     "@zappar/zappar-aframe": "^0.3.5",
     "aframe-extras": "^6.1.1",
-    "aframe-watcher": "^1.4.0"
+    "aframe-watcher": "^1.4.0",
+    "animejs": "^3.2.1"
   },
   "devDependencies": {},
   "scripts": {

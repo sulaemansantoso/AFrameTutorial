@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superframe animation</title>
+
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.js"></script>
+    <script src="node_modules/animejs/lib/anime.js"></script>
+    <script>
+        AFRAME.registerComponent('nav-pointer', {
+            init: function () {
+                const el = this.el;// On click, send the NPC to the target location.
+                el.addEventListener('click', (e) => {
+                    const ctrlEl = el.sceneEl.querySelector('[nav-agent]');
+                    ctrlEl.setAttribute('nav-agent', {
+                        active: true,
+                        destination: e.detail.intersection.point
+                    });
+                });    // When hovering on the nav mesh, show a green cursor.
+                el.addEventListener('mouseenter', () => {
+                    el.setAttribute('material', { color: 'green' });
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.setAttribute('material', { color: 'crimson' })
+                });
+
+                // Refresh the raycaster after models load.
+                el.sceneEl.addEventListener('object3dset', () => {
+                    this.el.components.raycaster.refreshObjects();
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <a-scene inspector-plugin-recast>
+        <a-gltf-model src="model/winter_scene/scene.gltf" position="0 0 -5"></a-gltf-model>
+        <a-gltf-model src="model/winter_scene/navmesh.glb" checkpoint nav-mesh visible="false"></a-gltf-model>
+
+        <a-entity position="0 0 5" movement-controls="constrainToNavMesh:true;">
+            <a-entity camera position="0 1.5 0" look-controls>
+                <a-cursor></a-cursor>
+            </a-entity>
+        </a-entity>
+
+        <a-box id=box position="3 0.2 -3" color="red"></a-box>
+
+        <!-- <a-box nav-agent color="red" position="0 0.7 0"></a-box> -->
+    </a-scene>
+    <script>
+        var position = {
+            x: 0,
+            y: 0,
+            z: 0
+        }
+        anime({
+            loop: true,
+            direction: 'alternate',
+            targets: position,
+            x: 2,
+            y: 5,
+            duration: 2000,
+            easing : 'linear',
+            update: function () {
+                document.querySelector("#box").setAttribute('position', `${position.x} ${position.y} ${position.z} `);
+
+            }
+        });
+    </script>
+</body>
+
+</html>
