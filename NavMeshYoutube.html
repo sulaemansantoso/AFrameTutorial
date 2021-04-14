@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NavMesh Tutorial </title>
+
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.js"></script> -->
+    <script src="node_modules/aframe-extras/dist/aframe-extras.pathfinding.js"></script>
+    <script>
+
+
+
+    </script>
+    <script>
+        AFRAME.registerComponent('nav-pointer', {
+            init: function () {
+                const el = this.el;
+
+                // On click, send the NPC to the target location.
+
+                el.addEventListener('click', (e) => {
+                    const ctrlEl = el.sceneEl.querySelector('[nav-agent]');
+                    let d = e.detail.intersection.point;
+                    ctrlEl.setAttribute('nav-agent', {
+                        active: true,
+                        destination: { x: d.x, y: d.y, z: d.z }
+                    });
+                });
+
+                // When hovering on the nav mesh, show a green cursor.
+                el.addEventListener('mouseenter', () => {
+                    el.setAttribute('material', { color: 'green' });
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.setAttribute('material', { color: 'crimson' })
+                });
+
+                // Refresh the raycaster after models load.
+                el.sceneEl.addEventListener('object3dset', () => {
+                    this.el.components.raycaster.refreshObjects();
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <a-scene inspector-plugin-recast>
+
+        <a-entity id="Rig" position="0 2 5" movement-controls>
+            <a-entity camera position="0 1.5 0" look-controls>
+                <a-cursor nav-pointer raycaster="objects: [nav-mesh]"></a-cursor>
+            </a-entity>
+        </a-entity>
+
+        <a-gltf-model src="model/navmesh.gltf" nav-mesh position="0 0.1 0"></a-gltf-model>
+
+        <a-entity position="2 0.1 -2" nav-agent>
+            <a-box position="0 1.5 0" color=red></a-box>
+        </a-entity>
+        <a-box src="texture/grass.jpg" repeat="20 20" width=20 height=0.2 depth=20></a-box>
+
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="0 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="-4 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="4 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" rotation="90 0 0" width="2" height="5" depth="1"
+            position="-4 2.5 -1.5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" rotation="90 0 0" width="2" height="5" depth="1" position="4 3.5 -1.5">
+        </a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="-8 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="8 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" rotation="105 0 0" width="2" height="5" depth="1"
+            position="-8 0.5 -1.5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" rotation="120 0 0" width="2" height="5" depth="1"
+            position="8 0.5 -1.5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="4 2.5 -5"></a-box>
+
+
+    </a-scene>
+    <script>
+
+    </script>
+</body>
+
+</html>

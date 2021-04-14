@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NavMesh Tutorial </title>
+
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.js"></script>
+</head>
+
+<body>
+    <a-scene inspector-plugin-recast>
+
+        <a-entity id="Rig" position="0 2 5" movement-controls>
+            <a-entity camera position="0 1.5 0" look-controls>
+                <a-cursor nav-pointer raycaster="objects: [nav-mesh]"></a-cursor>
+            </a-entity>
+        </a-entity>
+
+        <a-gltf-model src="model/navmesh.gltf" nav-mesh position="0 0.1 0" visible="true"></a-gltf-model>
+      
+        <a-box src="texture/grass.jpg" repeat="20 20" width=20 height=0.2 depth=20></a-box>
+
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="0 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="-4 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="4 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" rotation="90 0 0" width="2" height="5" depth="1"
+            position="-4 2.5 -1.5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" rotation="90 0 0" width="2" height="5" depth="1" position="4 3.5 -1.5">
+        </a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="-8 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="8 2.5 -5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" rotation="105 0 0" width="2" height="5" depth="1"
+            position="-8 0.5 -1.5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" rotation="120 0 0" width="2" height="5" depth="1"
+            position="8 0.5 -1.5"></a-box>
+        <a-box src="texture/Brick/basecolor.jpg" width="2" height="5" depth="2" position="4 2.5 -5"></a-box>
+
+
+    </a-scene>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

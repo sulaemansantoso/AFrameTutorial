@@ -41,7 +41,7 @@
 <body>
     <a-scene inspector-plugin-recast>
         <a-gltf-model src="model/winter_scene/scene.gltf" position="0 0 -5"></a-gltf-model>
-        <a-gltf-model src="model/winter_scene/navmesh.glb" checkpoint nav-mesh visible="false"></a-gltf-model>
+        <a-gltf-model src="model/winter_scene/navmesh.glb" checkpoint nav-mesh visible="true"></a-gltf-model>
 
         <a-entity position="0 0 5" movement-controls="constrainToNavMesh:true;">
             <a-entity camera position="0 1.5 0" look-controls>
@@ -49,30 +49,10 @@
             </a-entity>
         </a-entity>
 
-        <a-box id=box position="3 0.2 -3" color="red"></a-box>
-
+    
         <!-- <a-box nav-agent color="red" position="0 0.7 0"></a-box> -->
     </a-scene>
-    <script>
-        var position = {
-            x: 0,
-            y: 0,
-            z: 0
-        }
-        anime({
-            loop: true,
-            direction: 'alternate',
-            targets: position,
-            x: 2,
-            y: 5,
-            duration: 2000,
-            easing : 'linear',
-            update: function () {
-                document.querySelector("#box").setAttribute('position', `${position.x} ${position.y} ${position.z} `);
-
-            }
-        });
-    </script>
+ 
 </body>
 
 </html>
