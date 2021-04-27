@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animation Tutorial</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="node_modules/animejs/lib/anime.min.js"></script>
+</head>
+
+<body>
+  <a-scene>
+    <a-box color="red" id="box1" position="0 1.5 -3"></a-box>
+
+    <script>
+  
+        var position = {
+            x: 0,
+            y: 0,
+            z: 0
+        }
+        anime({
+            loop: true,
+            direction: 'alternate',
+            targets: position,
+            y: 360,
+            duration: 2000,
+            easing: 'linear',
+            update: function () {
+                document.querySelector("#box1").setAttribute('rotation', `${position.x} ${position.y} ${position.z} `);
+
+            }
+        });
+    </script>
+
+    </script>
+  </a-scene>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Bad Example </title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+</head>
+
+<body>
+
+    <script>
+        AFRAME.registerComponent('monkey-creator', {
+            init: function () {
+           
+                let size = 10;
+                for (let i = -size; i < size; i++) {
+                    for (let j = -size; j < size; j++) {
+                        var sceneEl = document.querySelector('#scene1');
+                        var entityEl = document.createElement('a-entity');
+                        entityEl.setAttribute("position", `${i} 0.5 ${j}`);
+                        entityEl.setAttribute("scale", `0.3 0.3 0.3`);
+                        
+                        entityEl.setAttribute("gltf-model", "model/MonkeyWithAnimation.gltf");
+                        sceneEl.appendChild(entityEl);
+                    }
+                }
+            },
+        });
+    </script>
+
+    <a-scene id="scene1" stats>
+        <a-entity monkey-creator></a-entity>
+
+    
+
+    </a-scene>
+
+</body>
+
+</html>

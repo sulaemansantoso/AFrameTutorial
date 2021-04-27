@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Good Example </title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+  <script src="external/instanced-mesh.js"></script>
+
+</head>
+
+<body>
+  <script>
+    AFRAME.registerComponent('monkey-creator', {
+      init: function () {
+
+        let size = 10;
+        let index = 0;
+        for (let i = -size; i < size; i++) {
+          for (let j = -size; j < size; j++) {
+            index++;
+            var sceneEl = document.querySelector('a-scene');
+            var entityEl = document.createElement('a-entity');
+            entityEl.setAttribute('id', 'monkey' + index);
+            entityEl.setAttribute("position", `${i} 0.5 ${j}`);
+            entityEl.setAttribute("scale", `0.3 0.3 0.3`);
+            entityEl.setAttribute('instanced-mesh-member', 'mesh:#monkey');
+            sceneEl.appendChild(entityEl);
+          }
+        }
+      },
+    });
+  </script>
+
+  <a-scene id="scene1" stats renderer="colorManagement:true">
+    <a-asset-item id="helmet" src="model/MonkeyWithAnimation.gltf" response-type="arraybuffer" crossorigin="anonymous">
+    </a-asset-item>
+    <a-entity id="monkey" gltf-model="#helmet" instanced-mesh="capacity:1000">
+    </a-entity>
+  
+    <!-- <a-entity id="monkey2" instanced-mesh-member="mesh:#monkey" rotation="0 10 20" position="2 0.5 -3"></a-entity>
+    <a-entity id="monkey3" instanced-mesh-member="mesh:#monkey" rotation="20 -30 0" position="-1 0.5 -1"></a-entity>
+    <a-entity id="monkey4" instanced-mesh-member="mesh:#monkey" rotation="0 30 0" position="2 0.5 -1"></a-entity> -->
+
+    <a-entity monkey-creator ></a-entity>
+
+
+
+
+    <!-- <a-entity instanced-mesh-member="mesh:#monkey" src="#fallguy" position="-3 0.5 -4" scale="0.5 0.5 0.5"> -->
+    </a-entity>
+
+
+
+
+  </a-scene>
+</body>
+
+</html>
