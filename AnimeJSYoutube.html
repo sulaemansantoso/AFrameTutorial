@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeJS testing</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <style>
+        #box1 {
+            background-color: cadetblue;
+        }
+
+        #box2 {
+            background-color: lightcoral;
+        }
+
+        #box3 {
+            background-color: lightslategrey;
+        }
+
+        .boxes {
+            border: 2px solid black;
+
+            width: 100px;
+            height: 100px;
+            z-index: 9999;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1" class="boxes"></div>
+    <div id="box2" class="boxes"></div>
+    <div id="box3" class="boxes"></div>
+    <input type="text" name="" id="text1">
+    <a-scene>
+        <a-box class="redbox1" color="red" 
+        position="-2 1.5 -5"></a-box>
+
+    </a-scene>
+    <script>
+        anime({
+            targets: '.boxes',
+            keyframes: [
+                { translateX: 100 },
+                { translateY: 200 },
+                { translateX: 300 },
+                { translateY: 0 },
+
+            ],
+            duration: 5000
+        });
+        anime({
+            targets: '#box1',
+            opacity: 0.3,
+            width: '400px'
+        });
+        anime({
+            targets: '#text1',
+            value: [0, 100], round: 1
+        });
+
+        // anime({
+        //     targets: '.redbox1',
+        //     keyframes: [
+        //         { position: '-3 1.5 -3' },
+        //         { position: '-3 1.5 -1' },
+        //         { position: '0 1.5 -1' },
+        //         { position: '0 1.5 -3' },
+        //         { position: '3 1.5 -3' },
+        //     ],
+        //     duration: 5000
+        // })
+
+        anime({
+            targets: '.redbox1',
+            position: [
+                { value: '-3 0.5 -3' , duration: 200 },
+                { value: '0 0.5 -3', duration: 3000 },
+                { value: '0 0.5 -2', duration: 5000 },
+                { value: '3 0.5 -2', duration: 1000 },
+                { value: '3 0.5 -3' , duration: 3000},
+            ],
+            scale: [
+                { value: '1 1 1 ',  duration: 1000 },
+                { value: '0.5 0.5 0.5',  duration: 1000 },
+                { value: '1 1.5 1' ,  duration: 1000},
+                { value: '0.5 0.5 0.5',  duration: 1000 },
+                { value: '1 1 1' ,  duration: 1000},
+            ],
+
+          
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Billboard Example </title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="external/instanced-mesh.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/instanced-mesh@v0.1-alpha/src/instanced-mesh.min.js"></script> -->
+    <!-- <script src="https://cdn.rawgit.com/tizzle/aframe-sprite-component/master/dist/aframe-sprite-component.min.js"></script> -->
+    <script src="lib/billboard.js"></script>
+</head>
+
+<body>
+
+    <script>
+        AFRAME.registerComponent('monkey-creator', {
+            init: function () {
+                let jumlah = 3 ;
+
+                for (let i = -jumlah; i < jumlah; i++) {
+                    for (let j = -jumlah; j < jumlah; j++) {
+                        let sceneSaya = document.querySelector("#scene1");
+                        let elementBaru = document.createElement('a-sprite');
+
+                        elementBaru.setAttribute('position', `${i} 0.0 ${j}`);
+                        elementBaru.setAttribute('src',"texture/fir.png");
+                        elementBaru.setAttribute('resize', '1 1 1');
+                         // elementBaru.setAttribute('scale', '0.3 0.3 0.3');
+                        // elementBaru.setAttribute('rotation', `0 ${Math.random() * 360} 0`);
+
+                        // elementBaru.setAttribute('id', 'monkey' + i + j);
+                        // elementBaru.setAttribute('instanced-mesh-member', "mesh:#instance");
+                        // // elementBaru.setAttribute('gltf-model', "#monkey");
+                        sceneSaya.appendChild(elementBaru);
+                    }
+                }
+            }
+        });
+    </script>
+
+    <a-scene id="scene1">
+        <a-assets>
+            <img id="hotspotimage" src="texture/Brick/normal.jpg">
+        </a-assets>
+
+        <a-camera position="0 0 4"></a-camera>
+
+        <a-entity monkey-creator></a-entity>
+        <a-box position="1 0 -3" color="red"></a-box>
+        <!-- <a-sprite position="0 0 -3" resize="1 1 1" src="texture/fir.png"></a-sprite> -->
+
+        <a-sky color="#AADDF0"></a-sky>
+
+    </a-scene>
+
+</body>
+
+</html>

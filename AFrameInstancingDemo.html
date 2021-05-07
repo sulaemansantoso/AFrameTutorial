@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Demo Example </title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="external/instanced-mesh.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/instanced-mesh@v0.1-alpha/src/instanced-mesh.min.js"></script> -->
+</head>
+
+<body>
+
+    <script>
+        AFRAME.registerComponent('monkey-creator', {
+            init : function() {
+                let jumlah = 50;
+
+                for (let i=-jumlah;i< jumlah;i++) {
+                    for (let j =-jumlah;j<jumlah;j++) {
+                        let sceneSaya = document.querySelector("#scene1");
+                        let elementBaru = document.createElement('a-entity');
+
+                        elementBaru.setAttribute('position', `${i} 0.5 ${j}`);
+                        elementBaru.setAttribute('scale', '0.3 0.3 0.3');
+                        elementBaru.setAttribute('rotation', `0 ${Math.random() * 360} 0`);
+
+                        elementBaru.setAttribute('id', 'monkey'+ i+j);
+                        elementBaru.setAttribute('instanced-mesh-member', "mesh:#instance");
+                        // elementBaru.setAttribute('gltf-model', "#monkey");
+                        sceneSaya.appendChild(elementBaru);
+                    }
+                }
+            }
+        });
+    </script>
+
+    <a-scene id="scene1" stats>
+        <a-assets>
+            <a-asset-item id="monkey" src="model/MonkeyWithAnimation.gltf">
+            </a-asset-item>
+        </a-assets>
+
+        <a-camera position="0 1.5 4"></a-camera>
+
+        <a-entity monkey-creator></a-entity>
+        <a-entity id="instance" gltf-model="#monkey" instanced-mesh="capacity:10000"></a-entity>
+        
+        <!-- <a-entity instanced-mesh-member="mesh:#instance" position="-2 0 0"></a-entity>
+        <a-entity instanced-mesh-member="mesh:#instance" position="0 0 0" rotation="0 270 0"></a-entity>
+        <a-entity instanced-mesh-member="mesh:#instance" position="2 0 0"></a-entity>
+
+        <a-entity gltf-model="#monkey" position="-2 0 -2"></a-entity>
+        <a-entity gltf-model="#monkey" position=" 0 0 -2"></a-entity>
+        <a-entity gltf-model="#monkey" position=" 2 0 -2"></a-entity> -->
+
+
+
+    </a-scene>
+</body>
+
+</html>

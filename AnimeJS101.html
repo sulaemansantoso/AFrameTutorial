@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeJS testing</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <style>
+        #box1 {
+            background-color: cadetblue;
+        }
+
+        #box2 {
+            background-color: lightcoral;
+        }
+
+        #box3 {
+            background-color: lightslategrey;
+        }
+
+        .boxes {
+            border: 2px solid black;
+            width: 100px;
+            height: 100px;
+            z-index: 9999;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1" class="boxes"></div>
+    <div id="box2" class="boxes"></div>
+    <div id="box3" class="boxes"></div>
+
+    <a-scene>
+        <a-box id="abox1" color="red" position="0 1.5 -5"></a-box>
+    </a-scene>
+
+    <script>
+
+        let position = {
+            x: 0, y:0, z:0
+        };
+        anime( {
+            targets : position,
+            z : -20,
+            duration : 5000,
+            update : function () {
+                console.log(position.z);
+                let box = document.querySelector("#abox1");
+
+                box.setAttribute('position', `0 0 ${position.z}`);
+            }
+        });
+
+
+        // anime({
+        //     targets: "#abox1",
+        //     position: [
+        //         { value: "2 1.5 -3" , duration : 5000 },
+        //         { value: "-2 1.5 -3" },
+        //         { value: "-2 1.5 -10" },
+        //         { value: "2 1.5 -10" },
+        //     ],
+        //     rotation: [
+        //         { value: "0 0 0 " , duration : 5000 },
+        //         { value: "0 360 0 " },
+        //         { value: "360 0 0 " },
+        //         { value: "0 0 360 " },
+        //     ],
+            
+        // })
+
+
+        // anime({
+        //     targets : "#abox1",
+        //     keyframes : [
+        //         {position : "2 1.5 -3"},
+        //         {position : "-2 1.5 -3"},
+        //         {position : "-2 1.5 -10"},
+        //         {position : "2 1.5 -10"},
+        //     ],
+        //     duration : 5000
+        // });
+        // anime ( {
+        //     targets : "#abox1",
+        //     position : ["0 1.5 -5", " 2 1.5 -3"],
+        //     duration : 3000
+        // });
+
+    // anime({
+        //     //adalah parameter animasi
+        //     targets : "#box2",
+        //     // width : 600 //css Property
+        //     translateX : 300, // css transform
+        //     // object property / dom attribute
+        //     // svg attribute
+        //     duration : 5000,
+        //     delay : 1000
+        // });
+    </script>
+
+</body>
+
+</html>
