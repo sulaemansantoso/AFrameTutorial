@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Particle Example </title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+</head>
+
+<body>
+
+    <a-scene id="scene1">
+        <a-sky color="black"></a-sky>
+
+        <a-entity particle-system="preset:default; 
+            maxAge:20;
+            positionSpread: 0 0 5;
+            velocityValue : 0 2 0;
+            accelerationValue : 0 2 0;
+            rotationAxis : y;
+            color : #FF00FF;
+            size : 0.5;
+            particleCount : 2000;
+            opacity : 0.5;
+            dragValue : 1;
+            blending : 1;
+            texture : texture/logo.png;
+        "></a-entity>
+<!-- 
+        <a-entity particle-system="preset:default; 
+    " position="2 0 0 "></a-entity> -->
+        <a-camera position="0 1.5 3"></a-camera>
+    </a-scene>
+
+</body>
+
+</html>

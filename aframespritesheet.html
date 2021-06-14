@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My A-Frame Scene</title>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-spritesheet-component/dist/aframe-spritesheet-component.min.js"></script> -->
+    <script src="node_modules/aframe-particle-system-component/dist/aframe-particle-system-component.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <!-- rows/cols format-->
+        <a-image src="./texture/Coin/FullCoins.png" position="0 1.5 -2"
+         sprite-sheet="cols:8; rows: 1; progress: 1;">
+        </a-image>
+        <!-- json format -->
+        <!-- <a-image src="spritesheet.png" sprite-sheet="dataUrl: spritesheet.json; progress: 0;"></a-image> -->
+    </a-scene>
+</body>
+
+</html>

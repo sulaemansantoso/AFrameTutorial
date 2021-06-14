@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- attach the scripts -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script
+        src="https://gftruj.github.io/webzamples/PlanetVoodoo/reflection/dist/phong-reflector-component.js"></script>
+</head>
+
+<body>
+
+    <a-scene stats>
+
+        <a-camera position="-0.7 1.5 1"></a-camera>
+        <!-- Attach the component to an element -->
+        <a-box position="0 1.5 -2" color="red"></a-box>
+        <a-box position="2 1.5 -2" color="green"></a-box>
+        <a-box position="-2 1.5 -2" color="blue"></a-box>
+
+        <a-plane rotation="-90 0 0" color="grey" width="20" height="20"></a-plane>
+        <a-plane position="0 2 -4" width="20" height="20"  color="grey"
+        segments-height="128"
+        segments-width="128" 
+        phong-reflector="
+            src: texture/Brick/basecolor.jpg; 
+            repeat : 5 5;
+            color : #FFFFFF;
+            normalMap: texture/Brick/normal.jpg;
+            ambientOcclusionMap: texture/Brick/normal.jpg; 
+            displacementMap : texture/Brick/height.jpg;
+            displacementScale : 3;
+            blendingIntensity: 0.6; 
+            clipBias: 0; 
+            useWindowDimensions: true"
+        >
+     
+        </a-plane>
+        
+        <a-sky color="lightGrey"></a-sky>
+
+    </a-scene>
+    
+</body>
+
+</html>
