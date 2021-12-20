@@ -1,0 +1,38 @@
+<head>
+    <title>My A-Frame Scene</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+    <style>
+        .a-grab-cursor {
+            cursor: crosshair !important;
+        }
+        .a-grab-cursor:active {
+            cursor : grabbing !important;
+        }
+    </style>
+
+    <script>
+        var number = 0;
+        AFRAME.registerComponent('tester', {
+            init : function() {
+                var el = this.el;
+                el.addEventListener('mouseenter', function(){
+                    console.log(`%cIt Works ${number++ }`,'font-size:2em');
+                });
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+    <a-scene>
+        <a-camera>
+            <a-entity cursor="rayOrigin: mouse"></a-entity>
+        </a-camera>
+        <a-box tester color="red" position="0 1.5 -3"
+         animation__satu="property: position; from:0 1.5 -3;to: 0 2.5 -3; startEvents:click"
+         animation__dua="property: rotation; from:0 0 0 ;to: 0 360 0;  startEvents:click"
+         ></a-box>
+    </a-scene>
+</body>

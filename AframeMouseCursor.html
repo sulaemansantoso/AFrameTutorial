@@ -1,0 +1,49 @@
+<head>
+    <title>My A-Frame Scene</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script
+        src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+
+    <style>
+        /* .a-canvas.a-grab-cursor:hover{cursor:crosshair !important}
+        .a-canvas.a-grab-cursor:active,
+        .a-grabbing{cursor:grab !important} */
+        .a-grab-cursor {
+            cursor: url("texture/Coin/coin_01.png")  !important;
+        }
+        .a-grab-cursor:active {
+            cursor : url("texture/box_in_hand.ico") !important;
+        }
+
+    </style>
+
+    <script>
+        AFRAME.registerComponent("tester", {
+            init: function () {
+                console.log("init");
+
+                var el = this.el;
+                el.addEventListener('click', function () {
+                    console.log('clicked');
+                })
+            }
+
+        });
+
+
+    </script>
+</head>
+
+<body>
+
+    <script>
+        document.body.style.cursor = "crosshair";
+    </script>
+
+    <a-scene cursor="rayOrigin:mouse">
+        <!-- <a-entity camera look-controls mouse-cursor> -->
+
+        <a-box color="red" position="0 1.5 -3" animation="property:rotation; from:0 0 0; to :0 360 0;
+            startEvents: mouseenter" tester></a-box>
+    </a-scene>
+</body>
